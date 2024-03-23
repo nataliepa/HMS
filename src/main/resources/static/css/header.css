@@ -1,0 +1,24 @@
+img.feel-good-inc-logo {
+    filter: drop-shadow(2px 4px 6px gray);
+}
+
+.abs-img-wrapper {
+    z-index: -1;
+    position: absolute;
+    width: 100%;
+}
+
+.abs-img {
+    width: 100%;
+    height: 50vh;
+    filter: grayscale(1) opacity(0.8);
+    object-fit: cover;
+}
+
+.hms-main-content {
+    background-color: #fff;
+    margin-top: 150px;
+    padding: 25px;
+    box-shadow: 1px 1px 80px 20px #8d8d8d;
+    border-radius: 10px;
+}

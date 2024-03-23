@@ -12,18 +12,8 @@
     <title>Hardware Management System</title>
 
     <link rel="stylesheet" href="/css/bootstrap.css" th:href="@{/css/bootstrap.css}"/>
-    <!--<link rel="shortcut icon" th:href="@{/img/logistics.png}">
-    &lt;!&ndash; Bootstrap core CSS &ndash;&gt;
-    <link rel="stylesheet" href="/font-awesome/css/font-awesome.css" th:href="@{/font-awesome/css/font-awesome.css}"/>
-    &lt;!&ndash;external css&ndash;&gt;
-    <link rel="stylesheet" href="/css/zabuto_calendar.css" th:href="@{/css/zabuto_calendar.css}"/>
-    <link rel="stylesheet" href="/js/gritter/css/jquery.gritter.css" th:href="@{/js/gritter/css/jquery.gritter.css}"/>
-    <link rel="stylesheet" href="/lineicons/style.css" th:href="@{/lineicons/style.css}"/>
-    <link rel="stylesheet" href="/css/style.css" th:href="@{/css/style.css}"/>
-    <link rel="stylesheet" href="/css/style-responsive.css" th:href="@{/css/style-responsive.css}"/>
-    <script type="text/javascript" th:src="@{/js/chart-master/Chart.js}"></script>
-    <script type="text/javascript" th:src="@{/js/html5shiv.js}"></script>
-    <script type="text/javascript" th:src="@{/js/respond.min.js}"></script>-->
+    <link rel="stylesheet" href="/css/bootstrap.css" th:href="@{/css/header.css}"/>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 </head>
 
@@ -31,72 +21,104 @@
 
 <section id="container">
 
-    <header class="header black-bg">
-        <div class="sidebar-toggle-box">
-            <div class="fa fa-bars tooltips" data-placement="right" data-original-title="μενού"></div>
-        </div>
-
-        <a href="#" class="logo"><b>Hardware Management System</b></a>
-
-        <div class="nav notify-row" id="top_menu">
-            <!--  notification start -->
-            <ul class="nav top-menu">
-                <!-- settings start -->
-                <li class="dropdown">
-                    <!--<a data-toggle="dropdown" class="dropdown-toggle">
-                        <i class="fa fa-truck"></i>
-                        <span class="badge bg-theme" th:if="${newOrdersCount >0}" th:text="${newOrdersCount}"></span>
-                    </a>-->
-
-
-                    <ul class="dropdown-menu extended tasks-bar">
-                        <div class="notify-arrow notify-arrow-green"></div>
-                        <li sec:authorize="hasAnyAuthority('SuperAdmin')">
-                            <p class="green">Admin</p>
-                        </li>
-
-                        <li sec:authorize="hasAnyAuthority('LocalAdmin')">
-                            <p class="green">User</p>
-                        </li>
-
-
-
-                    </ul>
-                </li>
-
+    <nav class="py-2 bg-dark border-bottom">
+        <div class="container d-flex flex-wrap">
+            <ul class="nav me-auto">
+                <li class="nav-item"><a href="#" class="nav-link link-light px-2 active" aria-current="page">Home</a></li>
+                <li class="nav-item"><a href="#" class="nav-link link-light px-2">Features</a></li>
+                <li class="nav-item"><a href="#" class="nav-link link-light px-2">Pricing</a></li>
+                <li class="nav-item"><a href="#" class="nav-link link-light px-2">FAQs</a></li>
+                <li class="nav-item"><a href="#" class="nav-link link-light px-2">About</a></li>
             </ul>
-
-        </div>
-
-
-        <div class="top-menu">
-            <ul class="nav pull-right top-menu">
-                <li><a class="logout" th:href="@{/logout}">Αποσύνδεση</a></li>
+            <ul class="nav">
+                <li class="nav-item"><a href="#" class="nav-link link-light px-2">Login</a></li>
+                <li class="nav-item"><a href="#" class="nav-link link-light px-2">Sign up</a></li>
             </ul>
+        </div>
+    </nav>
+    <header class="py-3">
+        <div class="container d-flex flex-wrap justify-content-center">
+            <a href="/" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto text-dark text-decoration-none">
+                <img th:src="@{images/logo-black.png}" class="bi me-2 feel-good-inc-logo" width="80" alt="logo"/>
+                <span class="fs-4">Feel Good Inc.</span>
+            </a>
         </div>
     </header>
 
-    <table>
-        <thead>
-        <tr>
-            <th> Id </th>
-            <th> Department </th>
-            <th> Last Name </th>
-            <th> FirstName </th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:if="${workstations.isEmpty()}">
-            <td colspan="2"> No Workstations Available </td>
-        </tr>
-        <tr th:each="workstation : ${workstations}">
-            <td><span th:text="${workstation.workstationName}"></span></td>
-            <td><span th:text="${workstation.departmentName}"></span></td>
-            <td><span th:text="${workstation.employeeLastName}"></span></td>
-            <td><span th:text="${workstation.employeeFirstName}"></span></td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="abs-img-wrapper">
+        <img class="abs-img" th:src="@{images/hardware.jpg}" alt="logo"/>
+    </div>
+
+    <div class="container hms-main-content">
+        <table>
+            <thead>
+            <tr>
+                <th> Id </th>
+                <th> Department </th>
+                <th> Last Name </th>
+                <th> FirstName </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${workstations.isEmpty()}">
+                <td colspan="2"> No Workstations Available </td>
+            </tr>
+            <tr th:each="workstation : ${workstations}">
+                <td><span th:text="${workstation.workstationName}"></span></td>
+                <td><span th:text="${workstation.departmentName}"></span></td>
+                <td><span th:text="${workstation.employeeLastName}"></span></td>
+                <td><span th:text="${workstation.employeeFirstName}"></span></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+<!--    <header class="header black-bg">-->
+<!--        <div class="sidebar-toggle-box">-->
+<!--            <div class="fa fa-bars tooltips" data-placement="right" data-original-title="μενού"></div>-->
+<!--        </div>-->
+
+<!--        <a href="#" class="logo"><b>Hardware Management System</b></a>-->
+
+<!--        <div class="nav notify-row" id="top_menu">-->
+<!--            &lt;!&ndash;  notification start &ndash;&gt;-->
+<!--            <ul class="nav top-menu">-->
+<!--                &lt;!&ndash; settings start &ndash;&gt;-->
+<!--                <li class="dropdown">-->
+<!--                    &lt;!&ndash;<a data-toggle="dropdown" class="dropdown-toggle">-->
+<!--                        <i class="fa fa-truck"></i>-->
+<!--                        <span class="badge bg-theme" th:if="${newOrdersCount >0}" th:text="${newOrdersCount}"></span>-->
+<!--                    </a>&ndash;&gt;-->
+
+
+<!--                    <ul class="dropdown-menu extended tasks-bar">-->
+<!--                        <div class="notify-arrow notify-arrow-green"></div>-->
+<!--                        <li sec:authorize="hasAnyAuthority('SuperAdmin')">-->
+<!--                            <p class="green">Admin</p>-->
+<!--                        </li>-->
+
+<!--                        <li sec:authorize="hasAnyAuthority('LocalAdmin')">-->
+<!--                            <p class="green">User</p>-->
+<!--                        </li>-->
+
+
+
+<!--                    </ul>-->
+<!--                </li>-->
+
+<!--            </ul>-->
+
+<!--        </div>-->
+
+
+<!--        <div class="top-menu">-->
+<!--            <ul class="nav pull-right top-menu">-->
+<!--                <li><a class="logout" th:href="@{/logout}">Αποσύνδεση</a></li>-->
+<!--            </ul>-->
+<!--        </div>-->
+<!--    </header>-->
+
+
 </section>
 </body>
 </html>
