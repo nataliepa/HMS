@@ -36,5 +36,5 @@ public class CompanyBranch {
     private Set<User> users;
 
     @OneToMany(mappedBy = "companyBranch" ,fetch = FetchType.LAZY)
-    public Set<Workstation> workstations;
+    public Set<Department> departments;
 }

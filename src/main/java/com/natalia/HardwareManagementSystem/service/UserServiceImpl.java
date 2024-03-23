@@ -117,10 +117,9 @@ public class UserServiceImpl implements UserService {
         found.setFirstName(user.getFirstName());
         found.setLastName(user.getLastName());
         found.setRole(user.getRole());
-        //found.setStoreByStoreId(user.getStoreByStoreId());
         found.setEnable(user.getEnable());
 
-        if (   newPassword !=""){
+        if (!newPassword.isEmpty()){
 
             found.setPassword(passwordEncoder.encode(newPassword));
         }

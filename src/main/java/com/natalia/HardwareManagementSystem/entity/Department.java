@@ -23,6 +23,7 @@ public class Department {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "department" ,fetch = FetchType.LAZY)
-    private Set<Workstation> workstations;
+    @ManyToOne
+    @JoinColumn(name = "companyBranchId", referencedColumnName = "id")
+    private CompanyBranch companyBranch;
 }

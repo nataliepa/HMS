@@ -59,6 +59,8 @@
                             <p class="green">User</p>
                         </li>
 
+
+
                     </ul>
                 </li>
 
@@ -74,6 +76,27 @@
         </div>
     </header>
 
-
+    <table>
+        <thead>
+        <tr>
+            <th> Id </th>
+            <th> Department </th>
+            <th> Last Name </th>
+            <th> FirstName </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${workstations.isEmpty()}">
+            <td colspan="2"> No Workstations Available </td>
+        </tr>
+        <tr th:each="workstation : ${workstations}">
+            <td><span th:text="${workstations.workstationName}"></span></td>
+            <td><span th:text="${workstations.departmentName}"></span></td>
+            <td><span th:text="${workstations.employeeLastName}"></span></td>
+            <td><span th:text="${workstations.employeeFirstName}"></span></td>
+        </tr>
+        </tbody>
+    </table>
+</section>
 </body>
 </html>

@@ -34,6 +34,7 @@ public class Workstation {
     @OneToMany(mappedBy = "workstation" ,fetch = FetchType.LAZY)
     private Set<Employee> employees;
 
+    // a 4-digit number that increases according to the last workstation
     @Column(name = "name")
     private String name;
 }
