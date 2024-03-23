@@ -28,7 +28,7 @@ public class Employee {
     @Column(name = "email")
     private String email;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "workstationId", referencedColumnName = "id")
     private Workstation workstation;
 

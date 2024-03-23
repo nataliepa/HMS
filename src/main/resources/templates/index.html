@@ -90,10 +90,10 @@
             <td colspan="2"> No Workstations Available </td>
         </tr>
         <tr th:each="workstation : ${workstations}">
-            <td><span th:text="${workstations.workstationName}"></span></td>
-            <td><span th:text="${workstations.departmentName}"></span></td>
-            <td><span th:text="${workstations.employeeLastName}"></span></td>
-            <td><span th:text="${workstations.employeeFirstName}"></span></td>
+            <td><span th:text="${workstation.workstationName}"></span></td>
+            <td><span th:text="${workstation.departmentName}"></span></td>
+            <td><span th:text="${workstation.employeeLastName}"></span></td>
+            <td><span th:text="${workstation.employeeFirstName}"></span></td>
         </tr>
         </tbody>
     </table>

@@ -35,6 +35,6 @@ public class CompanyBranch {
     @OneToMany(mappedBy = "companyBranch" ,fetch = FetchType.LAZY)
     private Set<User> users;
 
-    @OneToMany(mappedBy = "companyBranch" ,fetch = FetchType.LAZY)
-    public Set<Department> departments;
+    @ManyToMany(mappedBy = "departmentCompanyBranch")
+    public Set<Department> departmentCompanyBranch;
 }

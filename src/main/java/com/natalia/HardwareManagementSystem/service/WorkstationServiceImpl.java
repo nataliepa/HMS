@@ -5,6 +5,7 @@ import com.natalia.HardwareManagementSystem.dto.workstation.GetWorkstationDto;
 import com.natalia.HardwareManagementSystem.dto.workstation.UpdateWorkstationDto;
 import com.natalia.HardwareManagementSystem.dto.workstation.filter.WorkstationFilterDto;
 import com.natalia.HardwareManagementSystem.entity.Workstation;
+import com.natalia.HardwareManagementSystem.mapper.WorkstationMapper;
 import com.natalia.HardwareManagementSystem.repository.WorkstationRepository;
 import com.natalia.HardwareManagementSystem.service.definition.WorkstationService;
 import org.apache.commons.collections4.Get;
@@ -47,7 +48,8 @@ public class WorkstationServiceImpl implements WorkstationService {
             workstations = workstationRepository.findAll(pageReq).stream().toList();
         }
 
-        modelMapper.map(workstations, workstationsDto);
+        //modelMapper.map(workstations, workstationsDto);
+        workstationsDto = WorkstationMapper.workstationToGetWorkstationDto(workstations);
 
         return workstationsDto;
     }

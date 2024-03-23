@@ -23,7 +23,10 @@ public class Department {
     @Column(name = "name")
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "companyBranchId", referencedColumnName = "id")
-    private CompanyBranch companyBranch;
+    @ManyToMany
+    @JoinTable(
+            name = "department_company_branch",
+            joinColumns = @JoinColumn(name = "company_branch_id"),
+            inverseJoinColumns = @JoinColumn(name = "department_id"))
+    private Set<CompanyBranch> departmentCompanyBranch;
 }
