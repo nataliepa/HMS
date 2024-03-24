@@ -23,6 +23,9 @@ public class Department {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "abbreviation")
+    private String abbreviation;
+
     @ManyToMany
     @JoinTable(
             name = "department_company_branch",
@@ -30,3 +33,4 @@ public class Department {
             inverseJoinColumns = @JoinColumn(name = "department_id"))
     private Set<CompanyBranch> departmentCompanyBranch;
 }
+

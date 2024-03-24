@@ -1,6 +1,5 @@
 package com.natalia.HardwareManagementSystem.controller;
 
-
 import com.natalia.HardwareManagementSystem.dto.Department.DepartmentDto;
 import com.natalia.HardwareManagementSystem.dto.companyBranch.CompanyBranchDto;
 import com.natalia.HardwareManagementSystem.dto.workstation.filter.PaginationFilter;
@@ -19,14 +18,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class MainController {
-
-
+public class DepartmentController {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
     private final UserService userService;
@@ -36,7 +33,7 @@ public class MainController {
     private final DepartmentService departmentService;
     private final ModelMapper modelMapper;
 
-    public MainController(UserService userService, UserRoleService userRoleService, WorkstationService workstationService, CompanyBranchService companyBranchService, DepartmentService departmentService, ModelMapper modelMapper) {
+    public DepartmentController(UserService userService, UserRoleService userRoleService, WorkstationService workstationService, CompanyBranchService companyBranchService, DepartmentService departmentService, ModelMapper modelMapper) {
         this.userService = userService;
         this.userRoleService = userRoleService;
         this.workstationService = workstationService;
@@ -45,48 +42,31 @@ public class MainController {
         this.modelMapper = modelMapper;
     }
 
-    @GetMapping("/login")
-    public String login() {
-        return "login";
-    }
-
-
-    @GetMapping("/index")
-    public String index(Model model) {
+    @GetMapping(value = {"/departments/{companyBranchId}"})
+    public String index(Model model, @PathVariable("companyBranchId") int companyBranchId) {
         Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
         String username = loggedInUser.getName();  // username χρηστη
         User user = userService.findByUsername(username);  // ευρεση του χρηστη
         String role = loggedInUser.getAuthorities().toString();  // ρολος χρηστη
-        CompanyBranch companyBranch = user.getCompanyBranch();
-        WorkstationFilterDto workstationFilterDto = new WorkstationFilterDto();
-        workstationFilterDto.setPaginationFilter(new PaginationFilter());
 
-        // πληθος ενεργων χρηστων
-        long userCount = userService.findAll().stream().filter(u -> u.getEnable()==1).count();
 
         if (role.equals("[SuperAdmin]")) { // "SuperAdmin"
-            // return branches
-            List<CompanyBranch> companyBranchList = companyBranchService.findAll();
-            List<CompanyBranchDto> companyBranchDtoList = CompanyBranchMapper.companyBranchToCompanyBranchDto(companyBranchList);
+            // return departments
+            List<Department> departmentList = departmentService.findAll();
+            List<DepartmentDto> departmentDtoList = DepartmentMapper.departmentToDepartmentDto(departmentList);
 
-            model.addAttribute("companyBranchDtoList", companyBranchDtoList);
-            model.addAttribute("userCount", userCount);
-        }
-        else if (role.equals("[LocalAdmin]")) {
+            model.addAttribute("departmentDtoList", departmentDtoList);
+            model.addAttribute("user", user);
+        } else if (role.equals("[LocalAdmin]")) {
             List<Department> departmentList = departmentService.findAll();
             List<DepartmentDto> departmentDtoList = DepartmentMapper.departmentToDepartmentDto(departmentList);
 
             model.addAttribute("departmentDtoList", departmentDtoList);
         }
 
-        model.addAttribute("user", user);
-        return "index";
+
+
+        return "departments";
     }
 
-
-
-    @GetMapping("/")
-    public String any() {
-        return "redirect:/index";
-    }
 }
