@@ -15,7 +15,7 @@
 .abs-img {
     width: 100%;
     height: 50vh;
-    filter: grayscale(1) opacity(0.8);
+    filter: grayscale(0.7) opacity(0.8);
     object-fit: cover;
 }
 
@@ -24,11 +24,15 @@
     margin-top: 150px;
     padding: 25px;
     box-shadow: 1px 1px 80px 20px #8d8d8d;
-    border-radius: 10px;
+    border-radius: 10px 10px 0 0;
 }
 
 .nav-hms-link.active, .nav-hms-link:hover {
     color: #aba1a1;
     border-bottom: 1px solid #aba1a1;
     border-radius: 3px;
+}
+
+footer img {
+    filter: invert(1);
 }
