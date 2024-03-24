@@ -44,14 +44,23 @@ public class DepartmentController {
     }
 
     @GetMapping(value = {"/departments"})
-    public String index(Model model, @RequestParam(name = "branchId") String branchId) {
+    public String index(Model model, @RequestParam(required = false, name = "branchId") String branchId) {
         Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
         String username = loggedInUser.getName();  // username χρηστη
         User user = userService.findByUsername(username);  // ευρεση του χρηστη
+        String role = loggedInUser.getAuthorities().toString();
+
+        CompanyBranchDto companyBranchDto = new CompanyBranchDto();
+
+        if (role.equals("[SuperAdmin]")) { // "SuperAdmin"
+            companyBranchDto = companyBranchService.findById(Integer.parseInt(branchId));
+        }
+        else if (role.equals("[LocalAdmin]")) {
+            companyBranchDto = CompanyBranchMapper.companyBranchToCompanyBranchDto(user.getCompanyBranch());
+        }
 
         List<Department> departmentList = departmentService.findAll();
         List<DepartmentDto> departmentDtoList = DepartmentMapper.departmentToDepartmentDto(departmentList);
-        CompanyBranchDto companyBranchDto = companyBranchService.findById(Integer.parseInt(branchId));
 
         model.addAttribute("departmentDtoList", departmentDtoList);
         model.addAttribute("user", user);

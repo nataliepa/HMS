@@ -6,6 +6,7 @@ import com.natalia.HardwareManagementSystem.dto.workstation.WorkstationDto;
 import com.natalia.HardwareManagementSystem.entity.Department;
 import com.natalia.HardwareManagementSystem.entity.User;
 import com.natalia.HardwareManagementSystem.entity.Workstation;
+import com.natalia.HardwareManagementSystem.mapper.CompanyBranchMapper;
 import com.natalia.HardwareManagementSystem.mapper.DepartmentMapper;
 import com.natalia.HardwareManagementSystem.service.definition.*;
 import org.modelmapper.ModelMapper;
@@ -41,15 +42,24 @@ public class WorkstationController {
     }
 
     @GetMapping(value = {"/workstations"})
-    public String index(Model model, @RequestParam(name = "branchId") String branchId,
+    public String index(Model model, @RequestParam(required = false, name = "branchId") String branchId,
                         @RequestParam(name = "departmentId") String departmentId) {
         Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
         String username = loggedInUser.getName();  // username χρηστη
         User user = userService.findByUsername(username);  // ευρεση του χρηστη
+        String role = loggedInUser.getAuthorities().toString();
+
+        CompanyBranchDto companyBranchDto = new CompanyBranchDto();
+
+        if (role.equals("[SuperAdmin]")) { // "SuperAdmin"
+            companyBranchDto = companyBranchService.findById(Integer.parseInt(branchId));
+        }
+        else if (role.equals("[LocalAdmin]")) {
+            companyBranchDto = CompanyBranchMapper.companyBranchToCompanyBranchDto(user.getCompanyBranch());
+        }
 
         List<WorkstationDto> workstationDtoList = workstationService.findAll(Integer.parseInt(branchId),
                                                                              Integer.parseInt(departmentId));
-        CompanyBranchDto companyBranchDto = companyBranchService.findById(Integer.parseInt(branchId));
         DepartmentDto departmentDto = departmentService.findById(Integer.parseInt(departmentId));
 
         model.addAttribute("workstationDtoList", workstationDtoList);
