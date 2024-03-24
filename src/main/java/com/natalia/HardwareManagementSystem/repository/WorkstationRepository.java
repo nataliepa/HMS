@@ -9,8 +9,10 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 @Repository
-public interface WorkstationRepository extends PagingAndSortingRepository<Workstation, Integer> {
+public interface WorkstationRepository extends JpaRepository<Workstation, Integer> {
     Workstation findWorkstationsById(int id);
-    List<Workstation> findAllByCompanyBranch_Id(int companyBranchId, Pageable pageable);
-    List<Workstation> findAllByCompanyBranch_IdAndDepartment_Id(int companyBranchId, int departmentId, Pageable pageable);
+    /*List<Workstation> findAllByCompanyBranch_Id(int companyBranchId, Pageable pageable);
+    List<Workstation> findAllByCompanyBranch_IdAndDepartment_Id(int companyBranchId, int departmentId, Pageable pageable);*/
+    List<Workstation> findAllByCompanyBranch_Id(int companyBranchId);
+    List<Workstation> findAllByCompanyBranch_IdAndDepartment_Id(int companyBranchId, int departmentId);
 }

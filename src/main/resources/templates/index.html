@@ -50,25 +50,56 @@
     </div>
 
     <div class="container hms-main-content">
-        <table>
-            <thead>
+        <table sec:authorize="hasAnyAuthority('SuperAdmin')" class="table">
+            <thead class="thead-dark">
             <tr>
-                <th> Id </th>
-                <th> Department </th>
-                <th> Last Name </th>
-                <th> FirstName </th>
+                <th scope="col">#</th>
+                <th scope="col"> Id </th>
+                <th scope="col"> City </th>
+                <th scope="col"> Address </th>
+                <th scope="col"> Number </th>
+                <th scope="col"> Postal Code </th>
             </tr>
             </thead>
             <tbody>
-            <tr th:if="${workstations.isEmpty()}">
+            <tr th:if="${companyBranchDtoList.isEmpty()}">
+                <td colspan="2"> No CompanyBranches Available </td>
+            </tr>
+            <tr th:each="companyBranch,itrStat : ${companyBranchDtoList}">
+                <td><span th:text="${itrStat.index + 1}"></span></td>
+                <td><span th:text="${companyBranch.name}"></span></td>
+                <td><span th:text="${companyBranch.city}"></span></td>
+                <td><span th:text="${companyBranch.address}"></span></td>
+                <td><span th:text="${companyBranch.number}"></span></td>
+                <td><span th:text="${companyBranch.postal_code}"></span></td>
+            </tr>
+            </tbody>
+        </table>
+        <table sec:authorize="hasAnyAuthority('LocalAdmin')" class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col"> Name </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${departmentDtoList.isEmpty()}">
+                <td colspan="2"> No Departments Available </td>
+            </tr>
+            <tr th:each="department,itrStat : ${departmentDtoList}">
+                <td><span th:text="${itrStat.index + 1}"></span></td>
+                <td><span th:text="${department.name}"></span></td>
+            </tr>
+            <!--<tr th:if="${companyBranchDtoList.isEmpty()}">
                 <td colspan="2"> No Workstations Available </td>
             </tr>
-            <tr th:each="workstation : ${workstations}">
-                <td><span th:text="${workstation.workstationName}"></span></td>
-                <td><span th:text="${workstation.departmentName}"></span></td>
-                <td><span th:text="${workstation.employeeLastName}"></span></td>
-                <td><span th:text="${workstation.employeeFirstName}"></span></td>
-            </tr>
+            <tr th:each="workstation : ${companyBranchDtoList}">
+                <td><span th:text="${companyBranchDtoList.name}"></span></td>
+                <td><span th:text="${companyBranchDtoList.city}"></span></td>
+                <td><span th:text="${companyBranchDtoList.address}"></span></td>
+                <td><span th:text="${companyBranchDtoList.number}"></span></td>
+                <td><span th:text="${companyBranchDtoList.postal_code}"></span></td>
+            </tr>-->
             </tbody>
         </table>
     </div>

@@ -32,6 +32,9 @@ public class CompanyBranch {
     @Column(name = "number")
     private String number;
 
+    @Column(name = "name")
+    private String name;
+
     @OneToMany(mappedBy = "companyBranch" ,fetch = FetchType.LAZY)
     private Set<User> users;
 

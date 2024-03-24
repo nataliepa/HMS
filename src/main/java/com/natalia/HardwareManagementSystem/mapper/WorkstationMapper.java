@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class WorkstationMapper {
+public class WorkstationMapper {
     public static List<GetWorkstationDto> workstationToGetWorkstationDto(List<Workstation> workstations) {
 
         List<GetWorkstationDto> workstationDto = new ArrayList<>();

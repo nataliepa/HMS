@@ -28,9 +28,9 @@ public class WorkstationServiceImpl implements WorkstationService {
     private static final ModelMapper modelMapper = new ModelMapper();
 
     @Override
-    public List<GetWorkstationDto> getWorkstations(WorkstationFilterDto workstationFilterDto) {
+    public List<GetWorkstationDto> getWorkstations() {
 
-        List<GetWorkstationDto> workstationsDto = new ArrayList<>();
+        /*List<GetWorkstationDto> workstationsDto = new ArrayList<>();
         List<Workstation> workstations = new ArrayList<>();
         int page = workstationFilterDto.getPaginationFilter().page;
         int itemsPerPage = workstationFilterDto.getPaginationFilter().getItemsPerPage();
@@ -51,7 +51,8 @@ public class WorkstationServiceImpl implements WorkstationService {
         //modelMapper.map(workstations, workstationsDto);
         workstationsDto = WorkstationMapper.workstationToGetWorkstationDto(workstations);
 
-        return workstationsDto;
+        return workstationsDto;*/
+        return null;
     }
 
     @Override

@@ -9,7 +9,7 @@ import com.natalia.HardwareManagementSystem.entity.Workstation;
 import java.util.List;
 
 public interface WorkstationService {
-    List<GetWorkstationDto> getWorkstations(WorkstationFilterDto workstationFilterDto);
+    List<GetWorkstationDto> getWorkstations();
     GetWorkstationDto getWorkstationById(int id);
     List<GetWorkstationDto> addWorkstation(int companyBranchId, int DepartmentId, AddWorkstationDto addWorkstationDto);
     GetWorkstationDto updateWorkstation(UpdateWorkstationDto updateWorkstationDto);
