@@ -1,6 +1,7 @@
 package com.natalia.HardwareManagementSystem.service.definition;
 
 
+import com.natalia.HardwareManagementSystem.dto.UserProfileDto;
 import com.natalia.HardwareManagementSystem.entity.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
@@ -18,7 +19,9 @@ public interface UserService extends UserDetailsService {
     User findByUsername(String username);
 
 
-    void edit(int id, User user, String newPassword);
+    void editProfile(User user, UserProfileDto userProfileDto);
+
+    void editPassword(int id, String newPassword);
 
 
 

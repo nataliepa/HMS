@@ -67,14 +67,14 @@
             <div class="card mb-5">
                 <div class="card-body">
                     <h5 class="card-title">Manage user profile</h5>
-                    <form class="row g-3" action="#" th:action="@{/seedstartermng}" th:object="${user}" method="post">
+                    <form class="row g-3" action="#" th:action="@{/updateProfile}" th:method="post" th:object="${userProfileDto}" method="post">
                         <div class="col-12">
                             <label for="inputFirstName" class="form-label">First name</label>
-                            <input type="text" class="form-control" id="inputFirstName" th:value="${user.getFirstName()}">
+                            <input type="text" class="form-control" id="inputFirstName" th:value="${userProfileDto.getInputFirstName()}">
                         </div>
                         <div class="col-12">
                             <label for="inputLastName" class="form-label">Last name</label>
-                            <input type="text" class="form-control" id="inputLastName" th:value="${user.getLastName()}">
+                            <input type="text" class="form-control" id="inputLastName" th:value="${userProfileDto.getInputLastName()}">
                         </div>
                         <div class="col-12">
                             <button type="reset" class="btn btn-outline-dark">Reset</button>
@@ -86,7 +86,7 @@
             <div class="card mb-5">
                 <div class="card-body">
                     <h5 class="card-title">Manage user password</h5>
-                    <form class="row g-3" action="#" th:action="@{/seedstartermng}" th:object="${user}" method="post">
+                    <form class="row g-3" action="#" th:action="@{/updatePassword}" th:object="${userForm}" method="post">
                         <div class="col-12">
                             <label for="inputPassword" class="form-label">First name</label>
                             <input type="password" class="form-control" id="inputPassword">

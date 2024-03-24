@@ -1,8 +1,11 @@
 package com.natalia.HardwareManagementSystem.controller;
 
 import com.natalia.HardwareManagementSystem.dto.Department.DepartmentDto;
+import com.natalia.HardwareManagementSystem.dto.UserPasswordDto;
+import com.natalia.HardwareManagementSystem.dto.UserProfileDto;
 import com.natalia.HardwareManagementSystem.dto.companyBranch.CompanyBranchDto;
 import com.natalia.HardwareManagementSystem.entity.Department;
+import com.natalia.HardwareManagementSystem.entity.Role;
 import com.natalia.HardwareManagementSystem.entity.User;
 import com.natalia.HardwareManagementSystem.mapper.CompanyBranchMapper;
 import com.natalia.HardwareManagementSystem.mapper.DepartmentMapper;
@@ -15,6 +18,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -40,13 +45,58 @@ public class UserProfileController {
     }
 
     @GetMapping(value = {"/profile"})
-    public String index(Model model) {
+    public String getProfile(Model model) {
         Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
         String username = loggedInUser.getName();  // username χρηστη
         User user = userService.findByUsername(username);  // ευρεση του χρηστη
+        UserProfileDto userProfileDto = new UserProfileDto(user.getLastName(), user.getFirstName());
 
-        model.addAttribute("user", user);
+        model.addAttribute("userProfileDto", userProfileDto);
 
         return "profile";
+    }
+
+    @PostMapping(value = {"/updateProfile"})
+    public String updateProfile(Model model, @ModelAttribute("userForm") UserProfileDto userProfileDto) {
+        Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
+        String username = loggedInUser.getName();  // username χρηστη
+        User user = userService.findByUsername(username);  // ευρεση του χρηστη
+        String role = loggedInUser.getAuthorities().toString();
+
+        userService.editProfile(user, userProfileDto);
+
+        //model.addAttribute("user", user);
+
+        if (role.equals("[SuperAdmin]")) { // "SuperAdmin"
+            // return branches
+            return "redirect:/companyBranches";
+        }
+        else if (role.equals("[LocalAdmin]")) {
+            return "redirect:/departments";
+        } else {
+            return "error";
+        }
+    }
+
+    @PostMapping(value = {"/updatePassword"})
+    public String updatePassword(Model model, @ModelAttribute("userPasswordDto") UserPasswordDto userPasswordDto) {
+        Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
+        String username = loggedInUser.getName();  // username χρηστη
+        User user = userService.findByUsername(username);  // ευρεση του χρηστη
+        String role = loggedInUser.getAuthorities().toString();
+
+        userService.editPassword(user.getId(), userPasswordDto.getPassword());
+
+        //model.addAttribute("user", user);
+
+        if (role.equals("[SuperAdmin]")) { // "SuperAdmin"
+            // return branches
+            return "redirect:/companyBranches";
+        }
+        else if (role.equals("[LocalAdmin]")) {
+            return "redirect:/departments";
+        } else {
+            return "error";
+        }
     }
 }

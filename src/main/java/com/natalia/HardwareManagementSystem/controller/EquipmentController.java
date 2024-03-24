@@ -1,11 +1,16 @@
 package com.natalia.HardwareManagementSystem.controller;
 
+import com.natalia.HardwareManagementSystem.dto.Department.DepartmentDto;
 import com.natalia.HardwareManagementSystem.dto.companyBranch.CompanyBranchDto;
 import com.natalia.HardwareManagementSystem.dto.equipment.CompanyPhoneDto;
 import com.natalia.HardwareManagementSystem.dto.equipment.ComputerDto;
 import com.natalia.HardwareManagementSystem.dto.equipment.MonitorDto;
+import com.natalia.HardwareManagementSystem.dto.workstation.WorkstationDto;
+import com.natalia.HardwareManagementSystem.entity.Department;
 import com.natalia.HardwareManagementSystem.entity.User;
+import com.natalia.HardwareManagementSystem.entity.Workstation;
 import com.natalia.HardwareManagementSystem.mapper.CompanyBranchMapper;
+import com.natalia.HardwareManagementSystem.mapper.DepartmentMapper;
 import com.natalia.HardwareManagementSystem.service.definition.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,7 +71,8 @@ public class EquipmentController {
         List<MonitorDto> monitorDtoList = equipmentService.findMonitorsByWorkstationId(id);
         List<CompanyPhoneDto> companyPhoneDtoList = equipmentService.findCompanyPhonesByWorkstationId(id);
 
-        //model.addAttribute("departmentDtoList", departmentDtoList);
+        DepartmentDto departmentDto = departmentService.findById(Integer.parseInt(departmentId));
+        WorkstationDto workstationDto = workstationService.findById(Integer.parseInt(workstationId));
 
         model.addAttribute("user", user);
         model.addAttribute("computerDtoList", computerDtoList);
@@ -74,7 +80,8 @@ public class EquipmentController {
         model.addAttribute("companyPhoneDtoList", companyPhoneDtoList);
         model.addAttribute("branchId", branchId);
         model.addAttribute("companyBranchDto", companyBranchDto);
-        model.addAttribute("departmentId", departmentId);
+        model.addAttribute("departmentDto", departmentDto);
+        model.addAttribute("workstationDto", workstationDto);
 
         return "equipment";
     }

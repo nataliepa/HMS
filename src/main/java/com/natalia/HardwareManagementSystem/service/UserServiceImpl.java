@@ -1,6 +1,7 @@
 package com.natalia.HardwareManagementSystem.service;
 
 
+import com.natalia.HardwareManagementSystem.dto.UserProfileDto;
 import com.natalia.HardwareManagementSystem.entity.CompanyBranch;
 import com.natalia.HardwareManagementSystem.entity.Role;
 import com.natalia.HardwareManagementSystem.entity.User;
@@ -111,17 +112,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void edit(int id, User user , String newPassword) {
+    public void editProfile(User user, UserProfileDto userProfileDto) {
+        User found = userRepository.findById(user.getId());
+
+        found.setFirstName(userProfileDto.getInputFirstName());
+        found.setLastName(userProfileDto.getInputLastName());
+
+        userRepository.save(found);
+    }
+
+    @Override
+    public void editPassword(int id, String newPassword) {
         User found = userRepository.findById(id);
 
-        found.setComments(user.getComments());
-        found.setFirstName(user.getFirstName());
-        found.setLastName(user.getLastName());
-        found.setRole(user.getRole());
-        found.setEnable(user.getEnable());
-
         if (!newPassword.isEmpty()){
-
             found.setPassword(passwordEncoder.encode(newPassword));
         }
 
