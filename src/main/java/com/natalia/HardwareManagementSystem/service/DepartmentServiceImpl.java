@@ -1,6 +1,8 @@
 package com.natalia.HardwareManagementSystem.service;
 
+import com.natalia.HardwareManagementSystem.dto.Department.DepartmentDto;
 import com.natalia.HardwareManagementSystem.entity.Department;
+import com.natalia.HardwareManagementSystem.mapper.DepartmentMapper;
 import com.natalia.HardwareManagementSystem.repository.CompanyBranchRepository;
 import com.natalia.HardwareManagementSystem.repository.DepartmentRepository;
 import com.natalia.HardwareManagementSystem.service.definition.DepartmentService;
@@ -16,8 +18,12 @@ public class DepartmentServiceImpl implements DepartmentService {
     DepartmentRepository departmentRepository;
 
     @Override
-    public Department findById(int id) {
-        return null;
+    public DepartmentDto findById(int id) {
+
+       Department department = departmentRepository.findDepartmentById(id);
+       DepartmentDto departmentDto = DepartmentMapper.departmentToDepartmentDto(department);
+
+        return departmentDto;
     }
 
     @Override

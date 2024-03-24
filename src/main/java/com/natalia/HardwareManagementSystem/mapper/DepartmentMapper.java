@@ -1,9 +1,7 @@
 package com.natalia.HardwareManagementSystem.mapper;
 
 import com.natalia.HardwareManagementSystem.dto.Department.DepartmentDto;
-import com.natalia.HardwareManagementSystem.dto.workstation.GetWorkstationDto;
 import com.natalia.HardwareManagementSystem.entity.Department;
-import com.natalia.HardwareManagementSystem.entity.Workstation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,5 +21,16 @@ public class DepartmentMapper {
         }
 
         return departmentDtoList;
+    }
+
+    public static DepartmentDto departmentToDepartmentDto(Department department) {
+
+        DepartmentDto departmentDto = new DepartmentDto();
+
+        departmentDto.setId(department.getId());
+        departmentDto.setName(department.getName());
+
+
+        return departmentDto;
     }
 }

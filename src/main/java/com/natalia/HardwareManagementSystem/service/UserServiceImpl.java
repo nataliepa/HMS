@@ -4,6 +4,7 @@ package com.natalia.HardwareManagementSystem.service;
 import com.natalia.HardwareManagementSystem.entity.CompanyBranch;
 import com.natalia.HardwareManagementSystem.entity.Role;
 import com.natalia.HardwareManagementSystem.entity.User;
+import com.natalia.HardwareManagementSystem.mapper.CompanyBranchMapper;
 import com.natalia.HardwareManagementSystem.repository.RoleRepository;
 import com.natalia.HardwareManagementSystem.repository.UserRepository;
 import com.natalia.HardwareManagementSystem.service.definition.CompanyBranchService;
@@ -49,9 +50,9 @@ public class UserServiceImpl implements UserService {
     public User createAdmin() {
         if (userRepository.findByUsername("admin") == null) {
 
-
             User admin = new User("admin", "admin", "admin", "admin", passwordEncoder.encode("Admin!1234"), 1,
-                    roleRepository.findByName("SuperAdmin"), companyBranchService.findById(1));
+                    roleRepository.findByName("SuperAdmin"),
+                    CompanyBranchMapper.companyBranchDtoToCompanyBranch(companyBranchService.findById(1)));
             return userRepository.save(admin);
         }
 
@@ -82,7 +83,7 @@ public class UserServiceImpl implements UserService {
         String code = passwordEncoder.encode(user.getPassword());
         Role userRole = userRoleService.findById(user.getRole().getId());
         String comments = user.getComments();
-        CompanyBranch companyBranch = companyBranchService.findById(user.getCompanyBranch().getId());
+        CompanyBranch companyBranch = CompanyBranchMapper.companyBranchDtoToCompanyBranch(companyBranchService.findById(user.getCompanyBranch().getId()));
 
         if (userRepository.findByUsername(username) == null) {
 

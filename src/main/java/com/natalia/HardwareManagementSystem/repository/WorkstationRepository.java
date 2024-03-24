@@ -14,5 +14,5 @@ public interface WorkstationRepository extends JpaRepository<Workstation, Intege
     /*List<Workstation> findAllByCompanyBranch_Id(int companyBranchId, Pageable pageable);
     List<Workstation> findAllByCompanyBranch_IdAndDepartment_Id(int companyBranchId, int departmentId, Pageable pageable);*/
     List<Workstation> findAllByCompanyBranch_Id(int companyBranchId);
-    List<Workstation> findAllByCompanyBranch_IdAndDepartment_Id(int companyBranchId, int departmentId);
+    List<Workstation> findAllByCompanyBranch_IdAndDepartment_IdOrderByName(int companyBranchId, int departmentId);
 }

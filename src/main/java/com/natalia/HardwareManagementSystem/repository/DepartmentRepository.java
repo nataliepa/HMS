@@ -8,4 +8,5 @@ import java.util.List;
 public interface DepartmentRepository extends JpaRepository<Department, Integer> {
     List<Department> findAllByOrderByName();
     List<Department> findAll();
+    Department findDepartmentById(int id);
 }

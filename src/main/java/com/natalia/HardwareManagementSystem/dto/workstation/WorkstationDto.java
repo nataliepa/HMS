@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class GetWorkstationDto {
+public class WorkstationDto {
     private int workstationId;
     // a 4-digit number that increases according to the last workstation
     private String workstationName;
