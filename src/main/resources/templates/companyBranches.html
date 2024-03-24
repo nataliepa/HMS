@@ -5,6 +5,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Hardware Management System</title>
+  <link rel="icon" type="image/png" th:href="@{/images/favicon.png}"/>
 
   <link rel="stylesheet" href="/css/bootstrap.css" th:href="@{/css/bootstrap.css}"/>
   <link rel="stylesheet" href="/css/bootstrap.css" th:href="@{/css/header.css}"/>
@@ -50,9 +51,9 @@
         <span class="fs-4">Feel Good Inc.</span>
       </a>
       <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-        <li sec:authorize="hasAnyAuthority('SuperAdmin')"><a th:href="@{/index}" class="nav-link px-2 link-dark active">Manage branches</a></li>
-        <li sec:authorize="hasAnyAuthority('SuperAdmin')"><a th:href="@{/index}" class="nav-link px-2 link-dark">Manage users</a></li>
-        <li sec:authorize="hasAnyAuthority('LocalAdmin')"><a th:href="@{/index}" class="nav-link px-2 link-dark active">Departments</a></li>
+        <li sec:authorize="hasAnyAuthority('SuperAdmin')"><a th:href="@{/index}" class="nav-hms-link nav-link px-2 link-dark active">Manage branches</a></li>
+        <li sec:authorize="hasAnyAuthority('SuperAdmin')"><a th:href="@{/index}" class="nav-hms-link nav-link px-2 link-dark">Manage users</a></li>
+        <li sec:authorize="hasAnyAuthority('LocalAdmin')"><a th:href="@{/index}" class="nav-hms-link nav-link px-2 link-dark active">Departments</a></li>
       </ul>
     </div>
   </header>

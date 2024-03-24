@@ -16,6 +16,7 @@ public class DepartmentMapper {
 
             departmentDto.setId(department.getId());
             departmentDto.setName(department.getName());
+            departmentDto.setAbbreviation(department.getAbbreviation());
 
             departmentDtoList.add(departmentDto);
         }
