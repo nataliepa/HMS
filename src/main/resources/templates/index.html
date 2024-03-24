@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang:th="el"
+<html lang="en" th:lang="en"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" xmlns:lang="http://www.w3.org/1999/xhtml"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:background="http://www.w3.org/1999/xhtml">
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,26 +21,44 @@
 <section id="container">
 
     <nav class="py-2 bg-dark border-bottom">
-        <div class="container d-flex flex-wrap">
-            <ul class="nav me-auto">
-                <li class="nav-item"><a href="#" class="nav-link link-light px-2 active" aria-current="page">Home</a></li>
-                <li class="nav-item"><a href="#" class="nav-link link-light px-2">Features</a></li>
-                <li class="nav-item"><a href="#" class="nav-link link-light px-2">Pricing</a></li>
-                <li class="nav-item"><a href="#" class="nav-link link-light px-2">FAQs</a></li>
-                <li class="nav-item"><a href="#" class="nav-link link-light px-2">About</a></li>
-            </ul>
+        <div class="container d-flex flex-wrap justify-content-end">
             <ul class="nav">
-                <li class="nav-item"><a href="#" class="nav-link link-light px-2">Login</a></li>
-                <li class="nav-item"><a href="#" class="nav-link link-light px-2">Sign up</a></li>
+                <li class="nav-item">
+                    <span class="nav-link link-light px-2" th:text="${user.getRole().getName()}"/>
+                </li>
+                <li class="nav-item" sec:authorize="hasAnyAuthority('LocalAdmin')">
+                    <span class="nav-link link-light px-2" th:text="${'('+user.getCompanyBranch().getCity()+')'}"/>
+                </li>
+                <li class="nav-item">
+                    <div class="dropdown">
+                        <a href="#"
+                           class="nav-link px-2 d-flex align-items-center link-light text-decoration-none dropdown-toggle"
+                           id="dropdownUser2"
+                           data-bs-toggle="dropdown"
+                           aria-expanded="false"
+                           th:text="${'@'+user.getUsername()}"
+                        />
+                        <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+                            <li><a class="dropdown-item" th:href="@{/profile}">Profile</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" th:href="@{/logout}">Sign out</a></li>
+                        </ul>
+                    </div>
+                </li>
             </ul>
         </div>
     </nav>
     <header class="py-3">
-        <div class="container d-flex flex-wrap justify-content-center">
-            <a href="/" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto text-dark text-decoration-none">
-                <img th:src="@{images/logo-black.png}" class="bi me-2 feel-good-inc-logo" width="80" alt="logo"/>
+        <div class="container d-flex flex-wrap align-items-center">
+            <a th:href="@{/index}" class="feel-good-inc-logo d-flex align-items-center text-dark text-decoration-none">
+                <img th:src="@{images/logo-black.png}" class="bi me-2" width="80" alt="logo"/>
                 <span class="fs-4">Feel Good Inc.</span>
             </a>
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <li sec:authorize="hasAnyAuthority('SuperAdmin')"><a th:href="@{/index}" class="nav-link px-2 link-dark active">Manage branches</a></li>
+                <li sec:authorize="hasAnyAuthority('SuperAdmin')"><a th:href="@{/index}" class="nav-link px-2 link-dark">Manage users</a></li>
+                <li sec:authorize="hasAnyAuthority('LocalAdmin')"><a th:href="@{/index}" class="nav-link px-2 link-dark active">Departments</a></li>
+            </ul>
         </div>
     </header>
 

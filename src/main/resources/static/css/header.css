@@ -1,5 +1,9 @@
-img.feel-good-inc-logo {
+.feel-good-inc-logo > img {
     filter: drop-shadow(2px 4px 6px gray);
+}
+
+.feel-good-inc-logo {
+    padding-right: 50px;
 }
 
 .abs-img-wrapper {
@@ -21,4 +25,10 @@ img.feel-good-inc-logo {
     padding: 25px;
     box-shadow: 1px 1px 80px 20px #8d8d8d;
     border-radius: 10px;
+}
+
+.nav-link.active, .nav-link:hover {
+    color: #aba1a1;
+    border-bottom: 1px solid #aba1a1;
+    border-radius: 3px;
 }
