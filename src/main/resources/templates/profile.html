@@ -71,7 +71,7 @@
                         <div class="col-12">
                             <label for="inputFirstName" class="form-label">First name</label>
                             <div class="input-group has-validation">
-                                <input type="text" class="form-control" id="inputFirstName" th:value="${userProfileDto.getInputFirstName()}" required>
+                                <input type="text" class="form-control" id="inputFirstName" th:name="inputFirstName" th:value="${userProfileDto.getInputFirstName()}" required>
                                 <div class="invalid-feedback">
                                     Field can not be empty
                                 </div>
@@ -80,7 +80,7 @@
                         <div class="col-12">
                             <label for="inputLastName" class="form-label">Last name</label>
                             <div class="input-group has-validation">
-                                <input type="text" class="form-control" id="inputLastName" th:value="${userProfileDto.getInputLastName()}" required>
+                                <input type="text" class="form-control" id="inputLastName" th:name="inputLastName" th:value="${userProfileDto.getInputLastName()}" required>
                                 <div class="invalid-feedback">
                                     Field can not be empty
                                 </div>
@@ -96,11 +96,11 @@
             <div class="card mb-5">
                 <div class="card-body">
                     <h5 class="card-title">Manage user password</h5>
-                    <form class="row g-3" action="#" th:action="@{/updatePassword}" th:object="${userForm}" method="post">
+                    <form class="row g-3" action="#" th:action="@{/updatePassword}" th:object="${userPasswordDto}" method="post">
                         <div class="col-12">
                             <label for="inputPassword" class="form-label">New password</label>
                             <div class="input-group has-validation">
-                                <input type="password" class="form-control" id="inputPassword" required>
+                                <input type="password" class="form-control" id="inputPassword" th:name="inputPassword" required>
                                 <div class="invalid-feedback">
                                     Field can not be empty
                                 </div>

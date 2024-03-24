@@ -52,12 +52,14 @@ public class UserProfileController {
         UserProfileDto userProfileDto = new UserProfileDto(user.getLastName(), user.getFirstName());
 
         model.addAttribute("userProfileDto", userProfileDto);
+        model.addAttribute("userPasswordDto", new UserPasswordDto());
+        model.addAttribute("user", user);
 
         return "profile";
     }
 
     @PostMapping(value = {"/updateProfile"})
-    public String updateProfile(Model model, @ModelAttribute("userForm") UserProfileDto userProfileDto) {
+    public String updateProfile(Model model, @ModelAttribute("userProfileDto") UserProfileDto userProfileDto) {
         Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
         String username = loggedInUser.getName();  // username χρηστη
         User user = userService.findByUsername(username);  // ευρεση του χρηστη
@@ -65,17 +67,7 @@ public class UserProfileController {
 
         userService.editProfile(user, userProfileDto);
 
-        //model.addAttribute("user", user);
-
-        if (role.equals("[SuperAdmin]")) { // "SuperAdmin"
-            // return branches
-            return "redirect:/companyBranches";
-        }
-        else if (role.equals("[LocalAdmin]")) {
-            return "redirect:/departments";
-        } else {
-            return "error";
-        }
+        return "redirect:/profile";
     }
 
     @PostMapping(value = {"/updatePassword"})
@@ -85,18 +77,8 @@ public class UserProfileController {
         User user = userService.findByUsername(username);  // ευρεση του χρηστη
         String role = loggedInUser.getAuthorities().toString();
 
-        userService.editPassword(user.getId(), userPasswordDto.getPassword());
+        userService.editPassword(user.getId(), userPasswordDto.getInputPassword());
 
-        //model.addAttribute("user", user);
-
-        if (role.equals("[SuperAdmin]")) { // "SuperAdmin"
-            // return branches
-            return "redirect:/companyBranches";
-        }
-        else if (role.equals("[LocalAdmin]")) {
-            return "redirect:/departments";
-        } else {
-            return "error";
-        }
+        return "redirect:/profile";
     }
 }

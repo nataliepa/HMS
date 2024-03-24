@@ -34,7 +34,7 @@ public class WorkstationServiceImpl implements WorkstationService {
 
     @Override
     public WorkstationDto findById(int id) {
-        return null;
+        return WorkstationMapper.workstationToGetWorkstationDto(workstationRepository.findWorkstationById(id));
     }
 
     @Override
