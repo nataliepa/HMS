@@ -83,6 +83,25 @@
                     </form>
                 </div>
             </div>
+            <div class="card mb-5">
+                <div class="card-body">
+                    <h5 class="card-title">Manage user password</h5>
+                    <form class="row g-3" action="#" th:action="@{/seedstartermng}" th:object="${user}" method="post">
+                        <div class="col-12">
+                            <label for="inputPassword" class="form-label">First name</label>
+                            <input type="password" class="form-control" id="inputPassword">
+                        </div>
+                        <div class="col-12">
+                            <label for="inputPasswordConfirm" class="form-label">New password</label>
+                            <input type="password" class="form-control" id="inputPasswordConfirm">
+                        </div>
+                        <div class="col-12">
+                            <button type="reset" class="btn btn-outline-dark">Confirm new password</button>
+                            <button type="submit" class="btn btn-dark btn-primary">Update</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
     <footer class="py-4 bg-dark border-top d-flex flex-row justify-content-around align-items-end">
