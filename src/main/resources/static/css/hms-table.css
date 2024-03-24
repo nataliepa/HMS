@@ -1,0 +1,8 @@
+.hms-table tbody tr {
+    transition: background-color 0.5s ease;
+    cursor: pointer;
+}
+
+.hms-table tbody tr:hover {
+    background-color: lightgray;
+}
