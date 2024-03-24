@@ -2,8 +2,6 @@ package com.natalia.HardwareManagementSystem.controller;
 
 import com.natalia.HardwareManagementSystem.dto.Department.DepartmentDto;
 import com.natalia.HardwareManagementSystem.dto.companyBranch.CompanyBranchDto;
-import com.natalia.HardwareManagementSystem.dto.workstation.filter.PaginationFilter;
-import com.natalia.HardwareManagementSystem.dto.workstation.filter.WorkstationFilterDto;
 import com.natalia.HardwareManagementSystem.entity.CompanyBranch;
 import com.natalia.HardwareManagementSystem.entity.Department;
 import com.natalia.HardwareManagementSystem.entity.User;
@@ -18,12 +16,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
 @Controller
-public class DepartmentController {
+public class CompanyBranchController {
+
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
     private final UserService userService;
@@ -33,7 +31,7 @@ public class DepartmentController {
     private final DepartmentService departmentService;
     private final ModelMapper modelMapper;
 
-    public DepartmentController(UserService userService, UserRoleService userRoleService, WorkstationService workstationService, CompanyBranchService companyBranchService, DepartmentService departmentService, ModelMapper modelMapper) {
+    public CompanyBranchController(UserService userService, UserRoleService userRoleService, WorkstationService workstationService, CompanyBranchService companyBranchService, DepartmentService departmentService, ModelMapper modelMapper) {
         this.userService = userService;
         this.userRoleService = userRoleService;
         this.workstationService = workstationService;
@@ -42,19 +40,19 @@ public class DepartmentController {
         this.modelMapper = modelMapper;
     }
 
-    @GetMapping(value = {"/departments"})
+    @GetMapping(value = {"/companyBranches"})
     public String index(Model model) {
         Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
         String username = loggedInUser.getName();  // username χρηστη
         User user = userService.findByUsername(username);  // ευρεση του χρηστη
 
-        List<Department> departmentList = departmentService.findAll();
-        List<DepartmentDto> departmentDtoList = DepartmentMapper.departmentToDepartmentDto(departmentList);
+        List<CompanyBranch> companyBranchList = companyBranchService.findAll();
+        List<CompanyBranchDto> companyBranchDtoList = CompanyBranchMapper.companyBranchToCompanyBranchDto(companyBranchList);
 
-        model.addAttribute("departmentDtoList", departmentDtoList);
+        model.addAttribute("companyBranchDtoList", companyBranchDtoList);
         model.addAttribute("user", user);
 
-        return "departments";
+        return "companyBranches";
     }
 
 }

@@ -57,30 +57,16 @@ public class MainController {
         String username = loggedInUser.getName();  // username χρηστη
         User user = userService.findByUsername(username);  // ευρεση του χρηστη
         String role = loggedInUser.getAuthorities().toString();  // ρολος χρηστη
-        CompanyBranch companyBranch = user.getCompanyBranch();
-        WorkstationFilterDto workstationFilterDto = new WorkstationFilterDto();
-        workstationFilterDto.setPaginationFilter(new PaginationFilter());
-
-        // πληθος ενεργων χρηστων
-        long userCount = userService.findAll().stream().filter(u -> u.getEnable()==1).count();
 
         if (role.equals("[SuperAdmin]")) { // "SuperAdmin"
             // return branches
-            List<CompanyBranch> companyBranchList = companyBranchService.findAll();
-            List<CompanyBranchDto> companyBranchDtoList = CompanyBranchMapper.companyBranchToCompanyBranchDto(companyBranchList);
-
-            model.addAttribute("companyBranchDtoList", companyBranchDtoList);
-            model.addAttribute("userCount", userCount);
+            return "redirect:/companyBranches";
         }
         else if (role.equals("[LocalAdmin]")) {
-            List<Department> departmentList = departmentService.findAll();
-            List<DepartmentDto> departmentDtoList = DepartmentMapper.departmentToDepartmentDto(departmentList);
-
-            model.addAttribute("departmentDtoList", departmentDtoList);
+            return "redirect:/departments";
         }
 
-        model.addAttribute("user", user);
-        return "index";
+        return "error";
     }
 
 

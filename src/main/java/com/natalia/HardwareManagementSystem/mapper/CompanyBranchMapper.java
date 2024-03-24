@@ -18,10 +18,10 @@ public class CompanyBranchMapper {
 
             companyBranchDto.setId(companyBranch.getId());
             companyBranchDto.setName(companyBranch.getName());
-            companyBranchDto.setAddress(companyBranchDto.getAddress());
-            companyBranchDto.setNumber(companyBranchDto.getNumber());
-            companyBranchDto.setCity(companyBranchDto.getCity());
-            companyBranchDto.setPostal_code(companyBranchDto.getPostal_code());
+            companyBranchDto.setAddress(companyBranch.getAddress());
+            companyBranchDto.setNumber(companyBranch.getNumber());
+            companyBranchDto.setCity(companyBranch.getCity());
+            companyBranchDto.setPostal_code(companyBranch.getPostal_code());
 
             companyBranchDtoList.add(companyBranchDto);
         }
