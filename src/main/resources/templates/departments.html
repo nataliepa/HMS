@@ -64,6 +64,33 @@
     <div class="container hms-main-content">
         <h3 class="pb-2 align-self-center">Departments</h3>
         <div class="container px-4 py-5" id="icon-grid">
+            <div class="card mb-5">
+                <div class="card-body">
+                    <h5 class="card-title">Selected branch</h5>
+                    <form class="row g-3">
+                        <div class="col-md-6" style="pointer-events: none;">
+                            <label for="inputName" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="inputName" th:value="${companyBranchDto.getName()}">
+                        </div>
+                        <div class="col-md-6" style="pointer-events: none;">
+                            <label for="inputCity" class="form-label">City</label>
+                            <input type="text" class="form-control" id="inputCity" th:value="${companyBranchDto.getCity()}">
+                        </div>
+                        <div class="col-md-4" style="pointer-events: none;">
+                            <label for="inputAddress" class="form-label">Address</label>
+                            <input type="text" class="form-control" id="inputAddress" th:value="${companyBranchDto.getAddress()}">
+                        </div>
+                        <div class="col-md-4" style="pointer-events: none;">
+                            <label for="inputNumber" class="form-label">Number</label>
+                            <input type="text" class="form-control" id="inputNumber" th:value="${companyBranchDto.getNumber()}">
+                        </div>
+                        <div class="col-md-4" style="pointer-events: none;">
+                            <label for="inputZip" class="form-label">Postal code</label>
+                            <input type="text" class="form-control" id="inputZip" th:value="${companyBranchDto.getPostal_code()}">
+                        </div>
+                    </form>
+                </div>
+            </div>
             <h5 class="pb-2 border-bottom">Select a department to view workstations</h5>
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 py-5">
                 <a class="hms-grid-item col d-flex align-items-center nav-link link-dark"
