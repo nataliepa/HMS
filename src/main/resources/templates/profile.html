@@ -70,11 +70,21 @@
                     <form class="row g-3" action="#" th:action="@{/updateProfile}" th:method="post" th:object="${userProfileDto}" method="post">
                         <div class="col-12">
                             <label for="inputFirstName" class="form-label">First name</label>
-                            <input type="text" class="form-control" id="inputFirstName" th:value="${userProfileDto.getInputFirstName()}">
+                            <div class="input-group has-validation">
+                                <input type="text" class="form-control" id="inputFirstName" th:value="${userProfileDto.getInputFirstName()}" required>
+                                <div class="invalid-feedback">
+                                    Field can not be empty
+                                </div>
+                            </div>
                         </div>
                         <div class="col-12">
                             <label for="inputLastName" class="form-label">Last name</label>
-                            <input type="text" class="form-control" id="inputLastName" th:value="${userProfileDto.getInputLastName()}">
+                            <div class="input-group has-validation">
+                                <input type="text" class="form-control" id="inputLastName" th:value="${userProfileDto.getInputLastName()}" required>
+                                <div class="invalid-feedback">
+                                    Field can not be empty
+                                </div>
+                            </div>
                         </div>
                         <div class="col-12">
                             <button type="reset" class="btn btn-outline-dark">Reset</button>
@@ -88,12 +98,22 @@
                     <h5 class="card-title">Manage user password</h5>
                     <form class="row g-3" action="#" th:action="@{/updatePassword}" th:object="${userForm}" method="post">
                         <div class="col-12">
-                            <label for="inputPassword" class="form-label">First name</label>
-                            <input type="password" class="form-control" id="inputPassword">
+                            <label for="inputPassword" class="form-label">New password</label>
+                            <div class="input-group has-validation">
+                                <input type="password" class="form-control" id="inputPassword" required>
+                                <div class="invalid-feedback">
+                                    Field can not be empty
+                                </div>
+                            </div>
                         </div>
                         <div class="col-12">
-                            <label for="inputPasswordConfirm" class="form-label">New password</label>
-                            <input type="password" class="form-control" id="inputPasswordConfirm">
+                            <label for="inputPasswordConfirm" class="form-label">Confirm new password</label>
+                            <div class="input-group has-validation">
+                                <input type="password" class="form-control" id="inputPasswordConfirm" required>
+                                <div class="invalid-feedback">
+                                    Field can not be empty
+                                </div>
+                            </div>
                         </div>
                         <div class="col-12">
                             <button type="reset" class="btn btn-outline-dark">Confirm new password</button>
