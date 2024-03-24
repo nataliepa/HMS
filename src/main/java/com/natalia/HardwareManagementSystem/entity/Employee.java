@@ -28,10 +28,10 @@ public class Employee {
     @Column(name = "email")
     private String email;
 
+    @Column(name = "phoneNumber")
+    private String phoneNumber;
+
     @OneToOne
     @JoinColumn(name = "workstationId", referencedColumnName = "id")
     private Workstation workstation;
-
-    @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
-    private Set<Phone> phones;
 }

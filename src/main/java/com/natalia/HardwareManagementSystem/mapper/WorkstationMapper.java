@@ -18,6 +18,8 @@ public class WorkstationMapper {
             getWorkstationDto.setDepartmentName(workstation.getDepartment().getName());
             getWorkstationDto.setEmployeeLastName(workstation.getEmployee().getLastName());
             getWorkstationDto.setEmployeeFirstName(workstation.getEmployee().getFirstName());
+            getWorkstationDto.setEmployeeEmail(workstation.getEmployee().getEmail());
+            getWorkstationDto.setEmployeePhoneNumber(workstation.getEmployee().getPhoneNumber());
             workstationDto.add(getWorkstationDto);
         }
 

@@ -16,4 +16,6 @@ public class WorkstationDto {
     private String departmentName;
     private String employeeLastName;
     private String employeeFirstName;
+    private String employeeEmail;
+    private String employeePhoneNumber;
 }
