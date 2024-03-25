@@ -139,7 +139,7 @@
                     <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
                             <button type="button"
-                                    class="btn btn-outline-dark hms-grid-item-logo icon-square text-dark flex-shrink-0 me-3"
+                                    class="btn btn-outline-dark hms-grid-item-logo icon-square flex-shrink-0 me-3"
                                     data-bs-toggle="modal"
                                     data-bs-target="#addComputerModal"
                             >
@@ -210,7 +210,7 @@
                     <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
                             <button type="button"
-                                    class="btn btn-outline-dark hms-grid-item-logo icon-square text-dark flex-shrink-0 me-3"
+                                    class="btn btn-outline-dark hms-grid-item-logo icon-square flex-shrink-0 me-3"
                                     data-bs-toggle="modal"
                                     data-bs-target="#addMonitorModal"
                             >
@@ -278,7 +278,7 @@
                     <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
                             <button type="button"
-                                    class="btn btn-outline-dark hms-grid-item-logo icon-square text-dark flex-shrink-0 me-3"
+                                    class="btn btn-outline-dark hms-grid-item-logo icon-square flex-shrink-0 me-3"
                                     data-bs-toggle="modal"
                                     data-bs-target="#addCompanyPhoneModal"
                             >
@@ -350,13 +350,40 @@
                 <h5 class="modal-title" id="addComputerModalLabel">Add computer</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Add</button>
-            </div>
+            <form>
+                <div class="modal-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="inputAddComputerManufacturer" class="form-label">Manufacturer</label>
+                            <input type="text" class="form-control" name="computerManufacturer" id="inputAddComputerManufacturer">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputAddComputerModel" class="form-label">Model</label>
+                            <input type="text" class="form-control" name="computerModel" id="inputAddComputerModel">
+                        </div>
+                        <div class="col-md-12">
+                            <label for="inputAddComputerSerialNumber" class="form-label">Serial Number</label>
+                            <input type="text" class="form-control" name="computerSerialNumber" id="inputAddComputerSerialNumber">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="inputAddComputerCpu" class="form-label">CPU</label>
+                            <input type="text" class="form-control" name="computerCpu" id="inputAddComputerCpu">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="inputAddComputerRam" class="form-label">RAM</label>
+                            <input type="text" class="form-control" name="computerRam" id="inputAddComputerRam">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="inputAddComputerOs" class="form-label">OS</label>
+                            <input type="text" class="form-control" name="computerOs" id="inputAddComputerOs">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-dark">Add</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -371,8 +398,8 @@
                 ...
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Update</button>
+                <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-dark">Update</button>
             </div>
         </div>
     </div>
@@ -388,8 +415,8 @@
                 ...
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Delete</button>
+                <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-dark">Delete</button>
             </div>
         </div>
     </div>
@@ -401,13 +428,36 @@
                 <h5 class="modal-title" id="addMonitorModalLabel">Add monitor</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Add</button>
-            </div>
+            <form>
+                <div class="modal-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="inputAddMonitorManufacturer" class="form-label">Manufacturer</label>
+                            <input type="text" class="form-control" name="monitorManufacturer" id="inputAddMonitorManufacturer">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputAddMonitorModel" class="form-label">Model</label>
+                            <input type="text" class="form-control" name="monitorModel" id="inputAddMonitorModel">
+                        </div>
+                        <div class="col-md-12">
+                            <label for="inputAddMonitorSerialNumber" class="form-label">Serial Number</label>
+                            <input type="text" class="form-control" name="monitorSerialNumber" id="inputAddMonitorSerialNumber">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputAddMonitorScreenSize" class="form-label">Screen size</label>
+                            <input type="text" class="form-control" name="monitorScreenSize" id="inputAddMonitorScreenSize">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputAddMonitorResolution" class="form-label">Resolution</label>
+                            <input type="text" class="form-control" name="monitorResolution" id="inputAddMonitorResolution">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-dark">Add</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -422,8 +472,8 @@
                 ...
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Update</button>
+                <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-dark">Update</button>
             </div>
         </div>
     </div>
@@ -439,8 +489,8 @@
                 ...
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Delete</button>
+                <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-dark">Delete</button>
             </div>
         </div>
     </div>
@@ -452,13 +502,32 @@
                 <h5 class="modal-title" id="addCompanyPhoneModalLabel">Add company phone</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Add</button>
-            </div>
+            <form>
+                <div class="modal-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="inputAddCompanyPhoneManufacturer" class="form-label">Manufacturer</label>
+                            <input type="text" class="form-control" name="monitorManufacturer" id="inputAddCompanyPhoneManufacturer">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputAddCompanyPhoneModel" class="form-label">Model</label>
+                            <input type="text" class="form-control" name="monitorModel" id="inputAddCompanyPhoneModel">
+                        </div>
+                        <div class="col-md-12">
+                            <label for="inputAddCompanyPhoneSerialNumber" class="form-label">Serial Number</label>
+                            <input type="text" class="form-control" name="monitorSerialNumber" id="inputAddCompanyPhoneSerialNumber">
+                        </div>
+                        <div class="col-md-12">
+                            <label for="inputAddCompanyPhonePhoneNumber" class="form-label">Phone number</label>
+                            <input type="text" class="form-control" name="monitorPhoneNumber" id="inputAddCompanyPhonePhoneNumber">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-dark">Add</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -473,8 +542,8 @@
                 ...
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Update</button>
+                <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-dark">Update</button>
             </div>
         </div>
     </div>
@@ -490,8 +559,8 @@
                 ...
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Delete</button>
+                <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-dark">Delete</button>
             </div>
         </div>
     </div>
