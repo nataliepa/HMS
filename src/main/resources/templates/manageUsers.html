@@ -180,7 +180,7 @@
                 </div>
                 <div class="modal-body">
 
-                    <form class="row g-3" th:action="@{/addUser}" th:object="${addUserDto}" method="post" id="addUserForm">
+                    <form class="row g-3" th:action="@{/addUser}" th:object="${manageUserDto}" method="post" id="addUserForm">
                         <div class="col-md-6">
                             <label for="username" class="form-label">Username</label>
                             <input type="text" class="form-control" id="username" name="username" th:field="*{username}">

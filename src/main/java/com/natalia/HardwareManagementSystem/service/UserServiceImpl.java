@@ -134,7 +134,17 @@ public class UserServiceImpl implements UserService {
         userRepository.save(found);
     }
 
+    @Override
+    public void updateUser(User findUser, User updatedUser) {
+        findUser.setUsername(updatedUser.getUsername());
+        findUser.setPassword(updatedUser.getPassword());
+        findUser.setLastName(updatedUser.getLastName());
+        findUser.setFirstName(updatedUser.getFirstName());
+        findUser.setRole(updatedUser.getRole());
+        findUser.setCompanyBranch(updatedUser.getCompanyBranch());
 
+        userRepository.save(findUser);
+    }
 
 
     @Override
@@ -149,6 +159,11 @@ public class UserServiceImpl implements UserService {
 
         user.setEnable(0);
         userRepository.save(user);
+    }
+
+    @Override
+    public void delete(int id) {
+        userRepository.deleteById(id);
     }
 
     @Override

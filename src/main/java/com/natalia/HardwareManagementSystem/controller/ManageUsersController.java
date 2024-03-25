@@ -1,13 +1,10 @@
 package com.natalia.HardwareManagementSystem.controller;
 
-import com.natalia.HardwareManagementSystem.dto.AddUserDto;
+import com.natalia.HardwareManagementSystem.dto.ManageUserDto;
 import com.natalia.HardwareManagementSystem.dto.UserDto;
-import com.natalia.HardwareManagementSystem.dto.UserProfileDto;
-import com.natalia.HardwareManagementSystem.dto.companyBranch.CompanyBranchDto;
 import com.natalia.HardwareManagementSystem.entity.CompanyBranch;
 import com.natalia.HardwareManagementSystem.entity.Role;
 import com.natalia.HardwareManagementSystem.entity.User;
-import com.natalia.HardwareManagementSystem.mapper.CompanyBranchMapper;
 import com.natalia.HardwareManagementSystem.mapper.UserMapper;
 import com.natalia.HardwareManagementSystem.service.definition.*;
 import org.modelmapper.ModelMapper;
@@ -17,9 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -58,7 +53,7 @@ public class ManageUsersController {
 
             model.addAttribute("userDtoList", userDtoList);
             model.addAttribute("user", user);
-            model.addAttribute("addUserDto", new AddUserDto());
+            model.addAttribute("addUserDto", new ManageUserDto());
             model.addAttribute("rolesList", rolesList);
             model.addAttribute("companyBranchList", companyBranchList);
 
@@ -69,7 +64,7 @@ public class ManageUsersController {
     }
 
     @PostMapping(value = {"/addUser"})
-    public String addUser(Model model, @ModelAttribute("addUserDto") AddUserDto addUserDto) {
+    public String addUser(Model model, @ModelAttribute("addUserDto") ManageUserDto manageUserDto) {
         Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
         String username = loggedInUser.getName();  // username χρηστη
         User user = userService.findByUsername(username);  // ευρεση του χρηστη
@@ -77,15 +72,67 @@ public class ManageUsersController {
 
         if (role.equals("[SuperAdmin]")) { // "SuperAdmin"
 
-            Role newUserRole = userRoleService.findByName(addUserDto.getRole());
-            CompanyBranch companyBranch = companyBranchService.findByName(addUserDto.getCompanyBranch());
-            User newUser = UserMapper.AddUserDtoToUser(addUserDto, newUserRole, companyBranch);
+            Role newUserRole = userRoleService.findByName(manageUserDto.getRole());
+            CompanyBranch companyBranch = companyBranchService.findByName(manageUserDto.getCompanyBranch());
+            User newUser = UserMapper.AddUserDtoToUser(manageUserDto, newUserRole, companyBranch);
 
             if(userService.findByUsername(newUser.getUsername()) == null) {
                 userService.save(newUser);
                 model.addAttribute("savedMessage", "");
             } else {
                 model.addAttribute("savedMessage", "The user already exists");
+            }
+
+            return "redirect:/users";
+        }
+
+        return "error";
+    }
+
+    @PostMapping(value = {"/updateUser"})
+    public String updateUser(Model model, @ModelAttribute("updateUserDto") ManageUserDto manageUserDto) {
+        Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
+        String username = loggedInUser.getName();  // username χρηστη
+        User user = userService.findByUsername(username);  // ευρεση του χρηστη
+        String role = loggedInUser.getAuthorities().toString();
+
+        if (role.equals("[SuperAdmin]")) { // "SuperAdmin"
+
+            Role UserRole = userRoleService.findByName(manageUserDto.getRole());
+            CompanyBranch companyBranch = companyBranchService.findByName(manageUserDto.getCompanyBranch());
+            User updatedUser = UserMapper.AddUserDtoToUser(manageUserDto, UserRole, companyBranch);
+
+            User findUser = userService.findByUsername(updatedUser.getUsername());
+
+            if(findUser != null) {
+                userService.updateUser(findUser, updatedUser);
+                model.addAttribute("updatedMessage", "");
+            } else {
+                model.addAttribute("updatedMessage", "User not found");
+            }
+
+            return "redirect:/users";
+        }
+
+        return "error";
+    }
+
+    @PostMapping(value = {"/deleteUser"})
+    public String deleteUser(Model model, @RequestParam(name = "userId") int userId) {
+        Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
+        String username = loggedInUser.getName();  // username χρηστη
+        User user = userService.findByUsername(username);  // ευρεση του χρηστη
+        String role = loggedInUser.getAuthorities().toString();
+
+        if (role.equals("[SuperAdmin]")) { // "SuperAdmin"
+
+            User findUser = userService.findById(userId);
+
+            if(findUser != null) {
+                userService.delete(userId);
+                model.addAttribute("deleteMessage", "");
+            } else {
+                model.addAttribute("deleteMessage", "User not found");
             }
 
             return "redirect:/users";

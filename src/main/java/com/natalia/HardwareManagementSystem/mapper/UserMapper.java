@@ -1,16 +1,10 @@
 package com.natalia.HardwareManagementSystem.mapper;
 
-import com.natalia.HardwareManagementSystem.dto.AddUserDto;
-import com.natalia.HardwareManagementSystem.dto.Department.DepartmentDto;
+import com.natalia.HardwareManagementSystem.dto.ManageUserDto;
 import com.natalia.HardwareManagementSystem.dto.UserDto;
 import com.natalia.HardwareManagementSystem.entity.CompanyBranch;
-import com.natalia.HardwareManagementSystem.entity.Department;
 import com.natalia.HardwareManagementSystem.entity.Role;
 import com.natalia.HardwareManagementSystem.entity.User;
-import com.natalia.HardwareManagementSystem.repository.RoleRepository;
-import com.natalia.HardwareManagementSystem.service.definition.UserRoleService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,15 +65,14 @@ public class UserMapper {
         return userList;
     }
 
-    public static User AddUserDtoToUser(AddUserDto addUserDto, Role role, CompanyBranch companyBranch) {
+    public static User AddUserDtoToUser(ManageUserDto manageUserDto, Role role, CompanyBranch companyBranch) {
 
         User user = new User();
 
-        user.setId(addUserDto.getId());
-        user.setLastName(addUserDto.getLastName());
-        user.setFirstName(addUserDto.getFirstName());
-        user.setUsername(addUserDto.getUsername());
-        user.setPassword(addUserDto.getPassword());
+        user.setLastName(manageUserDto.getLastName());
+        user.setFirstName(manageUserDto.getFirstName());
+        user.setUsername(manageUserDto.getUsername());
+        user.setPassword(manageUserDto.getPassword());
         user.setRole(role);
         user.setCompanyBranch(companyBranch);
 
