@@ -12,7 +12,7 @@ import javax.persistence.Column;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ComputerDto extends EquipmentDto {
-    private int cpu;
-    private int ram;
-    private int operatingSystem;
+    private Integer cpu;
+    private Integer ram;
+    private String operatingSystem;
 }

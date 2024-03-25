@@ -14,7 +14,6 @@
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script type="text/javascript" th:src="@{/js/companyBranches.js}"></script>
 </head>
 <body>
 <section id="container">
@@ -77,6 +76,15 @@
         <h3 class="pb-2 align-self-center">Users</h3>
         <div class="container px-4 py-5" id="icon-grid">
             <h5 class="pb-2 border-bottom">Add, Update or Delete a User</h5>
+            <button type="button"
+                    class="btn btn-outline-dark hms-grid-item-logo icon-square text-dark flex-shrink-0 me-3"
+                    data-bs-toggle="modal"
+                    data-bs-target="#addModal"
+            >
+                <svg class="bi" width="1em" height="1em" style="fill: #212529">
+                    <use th:href="${'#icon-add'}"></use>
+                </svg> Add User
+            </button>
             <table class="hms-table table">
                 <thead class="thead-dark">
                 <tr>
@@ -86,6 +94,8 @@
                     <th scope="col">First Name</th>
                     <th scope="col">Role</th>
                     <th scope="col">Company Branch</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -99,10 +109,82 @@
                     <td><span th:text="${userDto.getFirstName()}"></span></td>
                     <td><span th:text="${userDto.getRole().getName()}"></span></td>
                     <td><span th:text="${userDto.getCompanyBranch().getName()}"></span></td>
+                    <td class="with-action">
+                        <button type="button"
+                                class="btn hms-grid-item-logo icon-square text-dark flex-shrink-0 me-3"
+                                data-bs-toggle="modal"
+                                data-bs-target="#editModal">
+                            <svg class="bi" width="1em" height="1em" style="fill: #212529">
+                                <use th:href="${'#icon-edit'}"></use>
+                            </svg>
+                        </button>
+                    </td>
+                    </td>
+                    <td class="with-action">
+                        <button type="button"
+                                class="btn hms-grid-item-logo icon-square text-dark flex-shrink-0 me-3"
+                                data-bs-toggle="modal"
+                                data-bs-target="#deleteModal">
+                            <svg class="bi" width="1em" height="1em" style="fill: #212529">
+                                <use th:href="${'#icon-delete'}"></use>
+                            </svg>
+                        </button>
+                    </td>
                     <td hidden="hidden" id="branch-id" th:text="${userDto.getId()}"></td>
                 </tr>
                 </tbody>
             </table>
+        </div>
+    </div>
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit User</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Delete User</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addModalLabel">Add User</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Add</button>
+                </div>
+            </div>
         </div>
     </div>
     <footer class="py-4 bg-dark border-top d-flex flex-row justify-content-around align-items-end">
@@ -110,5 +192,17 @@
         <p class="link-light no-margin"><small>Copyright 2023-2027</small></p>
     </footer>
 </section>
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="icon-add" viewBox="0 0 16 16">
+        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+    </symbol>
+    <symbol id="icon-edit" viewBox="0 0 16 16">
+        <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"/>
+    </symbol>
+    <symbol id="icon-delete" viewBox="0 0 16 16">
+        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+    </symbol>
+</svg>
 </body>
 </html>

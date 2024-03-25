@@ -16,11 +16,11 @@ import lombok.Setter;
 public class Computer extends Equipment {
 
     @Column(name = "cpu")
-    private int cpu;
+    private Integer cpu;
 
     @Column(name = "ram")
-    private int ram;
+    private Integer ram;
 
     @Column(name = "operating_system")
-    private int operatingSystem;
+    private String operatingSystem;
 }
