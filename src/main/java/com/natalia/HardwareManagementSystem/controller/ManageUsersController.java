@@ -1,10 +1,14 @@
 package com.natalia.HardwareManagementSystem.controller;
 
+import com.natalia.HardwareManagementSystem.dto.AddUserDto;
 import com.natalia.HardwareManagementSystem.dto.UserDto;
+import com.natalia.HardwareManagementSystem.dto.UserProfileDto;
 import com.natalia.HardwareManagementSystem.dto.companyBranch.CompanyBranchDto;
 import com.natalia.HardwareManagementSystem.entity.CompanyBranch;
+import com.natalia.HardwareManagementSystem.entity.Role;
 import com.natalia.HardwareManagementSystem.entity.User;
 import com.natalia.HardwareManagementSystem.mapper.CompanyBranchMapper;
+import com.natalia.HardwareManagementSystem.mapper.UserMapper;
 import com.natalia.HardwareManagementSystem.service.definition.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +18,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -39,7 +45,7 @@ public class ManageUsersController {
     }
 
     @GetMapping(value = {"/users"})
-    public String index(Model model) {
+    public String getUsers(Model model) {
         Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
         String username = loggedInUser.getName();  // username χρηστη
         User user = userService.findByUsername(username);  // ευρεση του χρηστη
@@ -47,17 +53,44 @@ public class ManageUsersController {
 
         if (role.equals("[SuperAdmin]")) { // "SuperAdmin"
             List<UserDto> userDtoList = userService.findAllAndSort();
+            List<Role> rolesList = userRoleService.findAll();
+            List<CompanyBranch> companyBranchList = companyBranchService.findAll();
 
             model.addAttribute("userDtoList", userDtoList);
             model.addAttribute("user", user);
+            model.addAttribute("addUserDto", new AddUserDto());
+            model.addAttribute("rolesList", rolesList);
+            model.addAttribute("companyBranchList", companyBranchList);
 
             return "manageUsers";
         }
 
         return "error";
+    }
 
+    @PostMapping(value = {"/addUser"})
+    public String addUser(Model model, @ModelAttribute("addUserDto") AddUserDto addUserDto) {
+        Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
+        String username = loggedInUser.getName();  // username χρηστη
+        User user = userService.findByUsername(username);  // ευρεση του χρηστη
+        String role = loggedInUser.getAuthorities().toString();
 
+        if (role.equals("[SuperAdmin]")) { // "SuperAdmin"
 
+            Role newUserRole = userRoleService.findByName(addUserDto.getRole());
+            CompanyBranch companyBranch = companyBranchService.findByName(addUserDto.getCompanyBranch());
+            User newUser = UserMapper.AddUserDtoToUser(addUserDto, newUserRole, companyBranch);
 
+            if(userService.findByUsername(newUser.getUsername()) == null) {
+                userService.save(newUser);
+                model.addAttribute("savedMessage", "");
+            } else {
+                model.addAttribute("savedMessage", "The user already exists");
+            }
+
+            return "redirect:/users";
+        }
+
+        return "error";
     }
 }

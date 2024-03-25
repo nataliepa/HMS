@@ -90,7 +90,7 @@ public class UserServiceImpl implements UserService {
 
         if (userRepository.findByUsername(username) == null) {
 
-            User newUser = new User(comments, lastname, firstname, code, username, 1,
+            User newUser = new User(comments, lastname, firstname, username, code, 1,
                     userRole, companyBranch);
             return userRepository.save(newUser);
 

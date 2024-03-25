@@ -27,4 +27,9 @@ public class CompanyBranchServiceImpl implements CompanyBranchService {
     public List<CompanyBranch> findAll() {
         return companyBranchRepository.findAllByOrderByName();
     }
+
+    @Override
+    public CompanyBranch findByName(String name) {
+        return companyBranchRepository.findCompanyBranchByNameEqualsIgnoreCase(name);
+    }
 }

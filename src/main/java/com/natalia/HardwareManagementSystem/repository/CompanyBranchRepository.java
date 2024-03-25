@@ -11,4 +11,5 @@ import java.util.List;
 public interface CompanyBranchRepository extends JpaRepository<CompanyBranch, Integer> {
     CompanyBranch findCompanyBranchById(int branchId);
     List<CompanyBranch> findAllByOrderByName();
+    CompanyBranch findCompanyBranchByNameEqualsIgnoreCase(String name);
 }

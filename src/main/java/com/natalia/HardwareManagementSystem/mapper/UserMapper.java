@@ -1,7 +1,9 @@
 package com.natalia.HardwareManagementSystem.mapper;
 
+import com.natalia.HardwareManagementSystem.dto.AddUserDto;
 import com.natalia.HardwareManagementSystem.dto.Department.DepartmentDto;
 import com.natalia.HardwareManagementSystem.dto.UserDto;
+import com.natalia.HardwareManagementSystem.entity.CompanyBranch;
 import com.natalia.HardwareManagementSystem.entity.Department;
 import com.natalia.HardwareManagementSystem.entity.Role;
 import com.natalia.HardwareManagementSystem.entity.User;
@@ -69,16 +71,17 @@ public class UserMapper {
         return userList;
     }
 
-    public static User UserToUserDto(UserDto userDto) {
+    public static User AddUserDtoToUser(AddUserDto addUserDto, Role role, CompanyBranch companyBranch) {
 
         User user = new User();
 
-        user.setId(userDto.getId());
-        user.setLastName(userDto.getLastName());
-        user.setFirstName(userDto.getFirstName());
-        user.setUsername(userDto.getUsername());
-        user.setRole(userDto.getRole());
-        user.setCompanyBranch(user.getCompanyBranch());
+        user.setId(addUserDto.getId());
+        user.setLastName(addUserDto.getLastName());
+        user.setFirstName(addUserDto.getFirstName());
+        user.setUsername(addUserDto.getUsername());
+        user.setPassword(addUserDto.getPassword());
+        user.setRole(role);
+        user.setCompanyBranch(companyBranch);
 
         return user;
     }
