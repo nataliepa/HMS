@@ -95,7 +95,10 @@ public class EquipmentController {
     }
 
     @PostMapping(value = {"/addComputer"})
-    public String addComputer(Model model, @ModelAttribute(name = "computerDto") ComputerDto computerDto)
+    public String addComputer(Model model, @ModelAttribute(name = "computerDto") ComputerDto computerDto,
+                              @RequestParam(required = false, name = "branchId") String branchId,
+                              @RequestParam(name = "departmentId") String departmentId,
+                              @RequestParam(name = "workstationId") String workstationId)
     {
         Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
         String username = loggedInUser.getName();  // username χρηστη
@@ -104,22 +107,25 @@ public class EquipmentController {
 
         if (role.equals("[SuperAdmin]")) { // "SuperAdmin"
 
-            WorkstationDto workstationDto = workstationService.findById(computerDto.getWorkstationId());
+            Workstation workstation = workstationService.findWorkstationById(computerDto.getWorkstationId());
 
-            if(equipmentService.addComputer(computerDto, workstationDto) != null) {
+            if(equipmentService.addComputer(computerDto, workstation) != null) {
                 model.addAttribute("savedMessage", "");
             } else {
                 model.addAttribute("savedMessage", "Computer already exists");
             }
 
-            return "redirect:/equipment";
+            return "redirect:/equipment?branchId=" + branchId + "&departmentId=" + departmentId + "&workstationId=" + workstationId;
         }
 
         return "error";
     }
 
-    @PostMapping(value = {"/updateComputerr"})
-    public String updateUser(Model model, @ModelAttribute("computerDto") ComputerDto computerDto) {
+    @PostMapping(value = {"/updateComputer"})
+    public String updateUser(Model model, @ModelAttribute("computerDto") ComputerDto computerDto,
+                             @RequestParam(required = false, name = "branchId") String branchId,
+                             @RequestParam(name = "departmentId") String departmentId,
+                             @RequestParam(name = "workstationId") String workstationId) {
         Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
         String username = loggedInUser.getName();  // username χρηστη
         User user = userService.findByUsername(username);  // ευρεση του χρηστη
@@ -133,14 +139,17 @@ public class EquipmentController {
                 model.addAttribute("updatedMessage", "Computer not found");
             }
 
-            return "redirect:/equipment";
+            return "redirect:/equipment?branchId=" + branchId + "&departmentId=" + departmentId + "&workstationId=" + workstationId;
         }
 
         return "error";
     }
 
     @PostMapping(value = {"/deleteComputer"})
-    public String deleteUser(Model model, @ModelAttribute(name = "computerDto") ComputerDto computerDto) {
+    public String deleteUser(Model model, @ModelAttribute(name = "computerDto") ComputerDto computerDto,
+                             @RequestParam(required = false, name = "branchId") String branchId,
+                             @RequestParam(name = "departmentId") String departmentId,
+                             @RequestParam(name = "workstationId") String workstationId) {
         Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
         String username = loggedInUser.getName();  // username χρηστη
         User user = userService.findByUsername(username);  // ευρεση του χρηστη
@@ -153,7 +162,7 @@ public class EquipmentController {
                 model.addAttribute("deleteMessage", "Computer not found");
             }
 
-            return "redirect:/equipment";
+            return "redirect:/equipment?branchId=" + branchId + "&departmentId=" + departmentId + "&workstationId=" + workstationId;
         }
 
         return "error";

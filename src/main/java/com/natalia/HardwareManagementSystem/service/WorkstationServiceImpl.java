@@ -38,6 +38,11 @@ public class WorkstationServiceImpl implements WorkstationService {
     }
 
     @Override
+    public Workstation findWorkstationById(int id) {
+        return workstationRepository.findWorkstationById(id);
+    }
+
+    @Override
     public List<WorkstationDto> addWorkstation(int companyBranchId, int DepartmentId, AddWorkstationDto addWorkstationDto) {
         return null;
     }

@@ -28,7 +28,7 @@ public class Workstation {
     @JoinColumn(name = "department_id", referencedColumnName = "id")
     private Department department;
 
-    @OneToMany(mappedBy = "workstation" ,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "workstation" ,fetch = FetchType.LAZY, cascade=CascadeType.ALL)
     private Set<Equipment> equipment;
 
     @OneToOne(mappedBy = "workstation" ,fetch = FetchType.LAZY)

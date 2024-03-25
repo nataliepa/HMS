@@ -14,9 +14,9 @@ public interface EquipmentService {
     List<ComputerDto> findComputersByWorkstationId(int id);
     List<MonitorDto> findMonitorsByWorkstationId(int id);
     List<CompanyPhoneDto> findCompanyPhonesByWorkstationId(int id);
-    ComputerDto addComputer(ComputerDto computerDto, WorkstationDto workstationDto);
-    MonitorDto addMonitor(MonitorDto monitorDto, WorkstationDto workstationDto);
-    CompanyPhoneDto addCompanyPhone(CompanyPhoneDto companyPhoneDto, WorkstationDto workstationDto);
+    ComputerDto addComputer(ComputerDto computerDto, Workstation workstation);
+    MonitorDto addMonitor(MonitorDto monitorDto, Workstation workstation);
+    CompanyPhoneDto addCompanyPhone(CompanyPhoneDto companyPhoneDto, Workstation workstation);
     ComputerDto updateComputer(ComputerDto computerDto);
     MonitorDto updateMonitor(MonitorDto monitorDto);
     CompanyPhoneDto updateCompanyPhone(CompanyPhoneDto companyPhoneDto);

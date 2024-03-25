@@ -68,25 +68,25 @@ public class EquipmentServiceImpl implements EquipmentService {
     }
 
     @Override
-    public ComputerDto addComputer(ComputerDto computerDto, WorkstationDto workstationDto) {
+    public ComputerDto addComputer(ComputerDto computerDto, Workstation workstation) {
         Computer computer = ComputerMapper.computerDtoToComputer(computerDto);
-        computer.setWorkstation(WorkstationMapper.workstationDtoWorkstation(workstationDto));
+        computer.setWorkstation(workstation);
 
         return ComputerMapper.computerToComputerDto(computerRepo.save(computer));
     }
 
     @Override
-    public MonitorDto addMonitor(MonitorDto monitorDto, WorkstationDto workstationDto) {
+    public MonitorDto addMonitor(MonitorDto monitorDto, Workstation workstation) {
         Monitor monitor = MonitorMapper.monitorDtoToMonitor(monitorDto);
-        monitor.setWorkstation(WorkstationMapper.workstationDtoWorkstation(workstationDto));
+        monitor.setWorkstation(workstation);
 
         return MonitorMapper.monitorToMonitorDto(monitorRepo.save(monitor));
     }
 
     @Override
-    public CompanyPhoneDto addCompanyPhone(CompanyPhoneDto companyPhoneDto, WorkstationDto workstationDto) {
+    public CompanyPhoneDto addCompanyPhone(CompanyPhoneDto companyPhoneDto, Workstation workstation) {
         CompanyPhone companyPhone = CompanyPhoneMapper.companyPhoneDtoToCompanyPhone(companyPhoneDto);
-        companyPhone.setWorkstation(WorkstationMapper.workstationDtoWorkstation(workstationDto));
+        companyPhone.setWorkstation(workstation);
 
         return CompanyPhoneMapper.companyPhoneToCompanyPhoneDto(companyPhoneRepo.save(companyPhone));
     }
