@@ -28,4 +28,36 @@ public class MonitorMapper {
 
         return monitorDtoList;
     }
+
+    public static MonitorDto monitorToMonitorDto(Monitor monitor) {
+
+
+        MonitorDto monitorDto = new MonitorDto();
+
+        monitorDto.setId(monitor.getId());
+        monitorDto.setManufacturer(monitor.getManufacturer());
+        monitorDto.setModel(monitor.getModel());
+        monitorDto.setSerialNumber(monitor.getSerialNumber());
+        monitorDto.setScreenSize(monitor.getScreenSize());
+        monitorDto.setScreenResolution(monitor.getScreenResolution());
+
+
+
+        return monitorDto;
+    }
+
+    public static Monitor monitorDtoToMonitor(MonitorDto monitorDto) {
+
+
+        Monitor monitor = new Monitor();
+
+        monitor.setId(monitorDto.getId());
+        monitor.setManufacturer(monitorDto.getManufacturer());
+        monitor.setModel(monitorDto.getModel());
+        monitor.setSerialNumber(monitorDto.getSerialNumber());
+        monitor.setScreenSize(monitorDto.getScreenSize());
+        monitor.setScreenResolution(monitorDto.getScreenResolution());
+
+        return monitor;
+    }
 }

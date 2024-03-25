@@ -28,4 +28,30 @@ public class CompanyPhoneMapper {
 
         return companyPhoneDtoList;
     }
+
+    public static CompanyPhoneDto companyPhoneToCompanyPhoneDto(CompanyPhone companyPhone) {
+
+        CompanyPhoneDto companyPhoneDto = new CompanyPhoneDto();
+
+        companyPhoneDto.setId(companyPhone.getId());
+        companyPhoneDto.setManufacturer(companyPhone.getManufacturer());
+        companyPhoneDto.setModel(companyPhone.getModel());
+        companyPhoneDto.setSerialNumber(companyPhone.getSerialNumber());
+        companyPhoneDto.setPhoneNumber(companyPhone.getPhoneNumber());
+
+        return companyPhoneDto;
+    }
+
+    public static CompanyPhone companyPhoneDtoToCompanyPhone(CompanyPhoneDto companyPhoneDto) {
+
+        CompanyPhone companyPhone = new CompanyPhone();
+
+        companyPhone.setId(companyPhoneDto.getId());
+        companyPhone.setManufacturer(companyPhoneDto.getManufacturer());
+        companyPhone.setModel(companyPhoneDto.getModel());
+        companyPhone.setSerialNumber(companyPhoneDto.getSerialNumber());
+        companyPhone.setPhoneNumber(companyPhoneDto.getPhoneNumber());
+
+        return companyPhone;
+    }
 }

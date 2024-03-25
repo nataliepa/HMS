@@ -374,38 +374,38 @@
                 <h5 class="modal-title" id="addComputerModalLabel">Add computer</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form>
+            <form th:action="@{/addComputer}" th:object="${computerDto}" method="post">
                 <div class="modal-body">
                     <div class="row g-3">
                         <div class="col-md-6">
                             <label for="inputAddComputerManufacturer" class="form-label">Manufacturer</label>
-                            <input type="text" class="form-control" name="computerManufacturer" id="inputAddComputerManufacturer">
+                            <input type="text" class="form-control" name="manufacturer" id="inputAddComputerManufacturer">
                         </div>
                         <div class="col-md-6">
                             <label for="inputAddComputerModel" class="form-label">Model</label>
-                            <input type="text" class="form-control" name="computerModel" id="inputAddComputerModel">
+                            <input type="text" class="form-control" name="model" id="inputAddComputerModel">
                         </div>
                         <div class="col-md-12">
                             <label for="inputAddComputerSerialNumber" class="form-label">Serial Number</label>
-                            <input type="text" class="form-control" name="computerSerialNumber" id="inputAddComputerSerialNumber">
+                            <input type="text" class="form-control" name="serialNumber" id="inputAddComputerSerialNumber">
                         </div>
                         <div class="col-md-4">
                             <label for="inputAddComputerCpu" class="form-label">CPU</label>
-                            <input type="text" class="form-control" name="computerCpu" id="inputAddComputerCpu">
+                            <input type="text" class="form-control" name="cpu" id="inputAddComputerCpu">
                         </div>
                         <div class="col-md-4">
                             <label for="inputAddComputerRam" class="form-label">RAM</label>
-                            <input type="text" class="form-control" name="computerRam" id="inputAddComputerRam">
+                            <input type="text" class="form-control" name="ram" id="inputAddComputerRam">
                         </div>
                         <div class="col-md-4">
                             <label for="inputAddComputerOs" class="form-label">OS</label>
-                            <input type="text" class="form-control" name="computerOs" id="inputAddComputerOs">
+                            <input type="text" class="form-control" name="operatingSystem" id="inputAddComputerOs">
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-dark">Add</button>
+                    <button type="submit" class="btn btn-dark">Add</button>
                 </div>
             </form>
         </div>
@@ -418,39 +418,39 @@
                 <h5 class="modal-title" id="editComputerModalLabel">Edit computer</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form>
+            <form th:action="@{/updateComputer}" th:object="${computerDto}" method="post">
                 <input type="hidden" id="inputEditComputerId" name="computerId">
                 <div class="modal-body">
                     <div class="row g-3">
                         <div class="col-md-6">
                             <label for="inputEditComputerManufacturer" class="form-label">Manufacturer</label>
-                            <input type="text" class="form-control" name="computerManufacturer" id="inputEditComputerManufacturer">
+                            <input type="text" class="form-control" name="manufacturer" id="inputEditComputerManufacturer">
                         </div>
                         <div class="col-md-6">
                             <label for="inputEditComputerModel" class="form-label">Model</label>
-                            <input type="text" class="form-control" name="computerModel" id="inputEditComputerModel">
+                            <input type="text" class="form-control" name="model" id="inputEditComputerModel">
                         </div>
                         <div class="col-md-12">
                             <label for="inputEditComputerSerialNumber" class="form-label">Serial Number</label>
-                            <input type="text" class="form-control" name="computerSerialNumber" id="inputEditComputerSerialNumber">
+                            <input type="text" class="form-control" name="serialNumber" id="inputEditComputerSerialNumber">
                         </div>
                         <div class="col-md-4">
                             <label for="inputEditComputerCpu" class="form-label">CPU</label>
-                            <input type="text" class="form-control" name="computerCpu" id="inputEditComputerCpu">
+                            <input type="text" class="form-control" name="cpu" id="inputEditComputerCpu">
                         </div>
                         <div class="col-md-4">
                             <label for="inputEditComputerRam" class="form-label">RAM</label>
-                            <input type="text" class="form-control" name="computerRam" id="inputEditComputerRam">
+                            <input type="text" class="form-control" name="ram" id="inputEditComputerRam">
                         </div>
                         <div class="col-md-4">
                             <label for="inputEditComputerOs" class="form-label">OS</label>
-                            <input type="text" class="form-control" name="computerOs" id="inputEditComputerOs">
+                            <input type="text" class="form-control" name="operatingSystem" id="inputEditComputerOs">
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-dark">Update</button>
+                    <button type="submit" class="btn btn-dark">Update</button>
                 </div>
             </form>
         </div>
@@ -463,14 +463,14 @@
                 <h5 class="modal-title" id="deleteComputerModalLabel">Delete computer</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form>
+            <form th:action="@{/delteUser}" method="post">
                 <input type="hidden" id="inputDeleteComputerId" name="computerId">
                 <div class="modal-body">
                     Are you sure you want to delete the computer?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-dark">Delete</button>
+                    <button type="submit" class="btn btn-dark">Delete</button>
                 </div>
             </form>
         </div>

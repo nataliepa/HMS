@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface ComputerRepository extends JpaRepository<Computer, Integer> {
     List<Computer> findAllByWorkstationIdOrderByManufacturer(int id);
+    Computer findComputerById(int id);
 }

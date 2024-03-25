@@ -1,16 +1,18 @@
 package com.natalia.HardwareManagementSystem.controller;
 
 import com.natalia.HardwareManagementSystem.dto.Department.DepartmentDto;
+import com.natalia.HardwareManagementSystem.dto.ManageUserDto;
 import com.natalia.HardwareManagementSystem.dto.companyBranch.CompanyBranchDto;
 import com.natalia.HardwareManagementSystem.dto.equipment.CompanyPhoneDto;
 import com.natalia.HardwareManagementSystem.dto.equipment.ComputerDto;
 import com.natalia.HardwareManagementSystem.dto.equipment.MonitorDto;
 import com.natalia.HardwareManagementSystem.dto.workstation.WorkstationDto;
-import com.natalia.HardwareManagementSystem.entity.Department;
-import com.natalia.HardwareManagementSystem.entity.User;
-import com.natalia.HardwareManagementSystem.entity.Workstation;
+import com.natalia.HardwareManagementSystem.entity.*;
+import com.natalia.HardwareManagementSystem.entity.equipment.Computer;
 import com.natalia.HardwareManagementSystem.mapper.CompanyBranchMapper;
 import com.natalia.HardwareManagementSystem.mapper.DepartmentMapper;
+import com.natalia.HardwareManagementSystem.mapper.UserMapper;
+import com.natalia.HardwareManagementSystem.mapper.equipment.ComputerMapper;
 import com.natalia.HardwareManagementSystem.service.definition.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -82,7 +86,74 @@ public class EquipmentController {
         model.addAttribute("companyBranchDto", companyBranchDto);
         model.addAttribute("departmentDto", departmentDto);
         model.addAttribute("workstationDto", workstationDto);
+        model.addAttribute("computerDto", new ComputerDto());
+        model.addAttribute("monitorDto", new ComputerDto());
+        model.addAttribute("companyPhoneDto", new CompanyPhoneDto());
 
         return "equipment";
     }
+
+    @PostMapping(value = {"/addComputer"})
+    public String addComputer(Model model, @RequestParam(required = false, name = "addComputerDto") ComputerDto computerDto)
+    {
+        Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
+        String username = loggedInUser.getName();  // username χρηστη
+        User user = userService.findByUsername(username);  // ευρεση του χρηστη
+        String role = loggedInUser.getAuthorities().toString();
+
+        if (role.equals("[SuperAdmin]")) { // "SuperAdmin"
+
+            if(equipmentService.addComputer(computerDto) != null) {
+                model.addAttribute("savedMessage", "");
+            } else {
+                model.addAttribute("savedMessage", "Computer already exists");
+            }
+
+            return "redirect:/equipment";
+        }
+
+        return "error";
+    }
+
+    @PostMapping(value = {"/updateComputerr"})
+    public String updateUser(Model model, @ModelAttribute("computerDto") ComputerDto computerDto) {
+        Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
+        String username = loggedInUser.getName();  // username χρηστη
+        User user = userService.findByUsername(username);  // ευρεση του χρηστη
+        String role = loggedInUser.getAuthorities().toString();
+
+        if (role.equals("[SuperAdmin]")) { // "SuperAdmin"
+
+            if(equipmentService.updateComputer(computerDto) != null) {
+                model.addAttribute("updatedMessage", "");
+            } else {
+                model.addAttribute("updatedMessage", "Computer not found");
+            }
+
+            return "redirect:/equipment";
+        }
+
+        return "error";
+    }
+
+    @PostMapping(value = {"/deleteComputer"})
+    public String deleteUser(Model model, @RequestParam(name = "computerId") int computerId) {
+        Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
+        String username = loggedInUser.getName();  // username χρηστη
+        User user = userService.findByUsername(username);  // ευρεση του χρηστη
+        String role = loggedInUser.getAuthorities().toString();
+
+        if (role.equals("[SuperAdmin]")) { // "SuperAdmin"
+            if(equipmentService.deleteComputer(computerId).isEmpty()) {
+                model.addAttribute("deleteMessage", "");
+            } else {
+                model.addAttribute("deleteMessage", "Computer not found");
+            }
+
+            return "redirect:/equipment";
+        }
+
+        return "error";
+    }
+
 }

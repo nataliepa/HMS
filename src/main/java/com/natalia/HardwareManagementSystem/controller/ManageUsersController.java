@@ -56,6 +56,7 @@ public class ManageUsersController {
             model.addAttribute("addUserDto", new ManageUserDto());
             model.addAttribute("rolesList", rolesList);
             model.addAttribute("companyBranchList", companyBranchList);
+            model.addAttribute("manageUserDto", new ManageUserDto());
 
             return "manageUsers";
         }

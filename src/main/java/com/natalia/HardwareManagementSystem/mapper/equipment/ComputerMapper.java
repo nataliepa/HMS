@@ -31,4 +31,36 @@ public class ComputerMapper {
 
         return computerDtoList;
     }
+
+    public static ComputerDto computerToComputerDto(Computer computer) {
+
+        ComputerDto computerDto = new ComputerDto();
+
+        computerDto.setId(computer.getId());
+        computerDto.setManufacturer(computer.getManufacturer());
+        computerDto.setModel(computer.getModel());
+        computerDto.setSerialNumber(computer.getSerialNumber());
+        computerDto.setCpu(computer.getCpu());
+        computerDto.setRam(computer.getRam());
+        computerDto.setOperatingSystem(computer.getOperatingSystem());
+
+
+        return computerDto;
+    }
+
+    public static Computer computerDtoToComputer(ComputerDto computerDto) {
+
+        Computer computer = new Computer();
+
+        computer.setId(computerDto.getId());
+        computer.setManufacturer(computerDto.getManufacturer());
+        computer.setModel(computerDto.getModel());
+        computer.setSerialNumber(computerDto.getSerialNumber());
+        computer.setCpu(computerDto.getCpu());
+        computer.setRam(computerDto.getRam());
+        computer.setOperatingSystem(computerDto.getOperatingSystem());
+
+
+        return computer;
+    }
 }

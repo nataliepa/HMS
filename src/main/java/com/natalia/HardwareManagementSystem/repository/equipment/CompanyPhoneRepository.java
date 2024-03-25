@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface CompanyPhoneRepository extends JpaRepository<CompanyPhone, Integer> {
     List<CompanyPhone> findAllByWorkstationIdOrderByManufacturer(int id);
+    CompanyPhone findCompanyPhoneById(int id);
 }

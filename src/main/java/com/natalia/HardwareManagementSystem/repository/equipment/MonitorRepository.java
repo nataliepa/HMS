@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface MonitorRepository extends JpaRepository<Monitor, Integer> {
     List<Monitor> findAllByWorkstationIdOrderByManufacturer(int id);
-
+    Monitor findMonitorById(int id);
 }
