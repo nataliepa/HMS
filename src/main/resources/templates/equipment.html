@@ -138,7 +138,7 @@
                     </h2>
                     <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
-                            <table class="hms-table table">
+                            <table class="hms-table-with-actions table">
                                 <thead class="thead-dark">
                                 <tr>
                                     <th scope="col">#</th>
@@ -148,6 +148,8 @@
                                     <th scope="col"> CPU </th>
                                     <th scope="col"> RAM </th>
                                     <th scope="col"> OS </th>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -162,9 +164,20 @@
                                     <td><span th:text="${computer.getCpu()}"></span></td>
                                     <td><span th:text="${computer.getRam()}"></span></td>
                                     <td><span th:text="${computer.getOperatingSystem()}"></span></td>
-                                    <td hidden="hidden" th:text="${companyBranchDto.getId()}"></td>
-                                    <td hidden="hidden" th:text="${departmentId}"></td>
-                                    <td hidden="hidden" th:text="${computer.getId()}"></td>
+                                    <td class="with-action">
+                                        <div class="hms-grid-item-logo icon-square text-dark flex-shrink-0 me-3">
+                                            <svg class="bi" width="1em" height="1em" style="fill: #212529">
+                                                <use th:href="${'#icon-edit'}"></use>
+                                            </svg>
+                                        </div>
+                                    </td>
+                                    <td class="with-action">
+                                        <div class="hms-grid-item-logo icon-square text-dark flex-shrink-0 me-3">
+                                            <svg class="bi" width="1em" height="1em" style="fill: #212529">
+                                                <use th:href="${'#icon-delete'}"></use>
+                                            </svg>
+                                        </div>
+                                    </td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -179,7 +192,7 @@
                     </h2>
                     <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
-                            <table class="hms-table table">
+                            <table class="hms-table-with-actions table">
                                 <thead class="thead-dark">
                                 <tr>
                                     <th scope="col">#</th>
@@ -188,6 +201,8 @@
                                     <th scope="col"> Serial Number </th>
                                     <th scope="col"> Screen Size </th>
                                     <th scope="col"> Resolution </th>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -201,9 +216,20 @@
                                     <td><span th:text="${monitor.getSerialNumber()}"></span></td>
                                     <td><span th:text="${monitor.getScreenSize()}"></span></td>
                                     <td><span th:text="${monitor.getScreenResolution()}"></span></td>
-                                    <td hidden="hidden" th:text="${companyBranchDto.getId()}"></td>
-                                    <td hidden="hidden" th:text="${departmentId}"></td>
-                                    <td hidden="hidden" th:text="${monitor.getId()}"></td>
+                                    <td class="with-action">
+                                        <div class="hms-grid-item-logo icon-square text-dark flex-shrink-0 me-3">
+                                            <svg class="bi" width="1em" height="1em" style="fill: #212529">
+                                                <use th:href="${'#icon-edit'}"></use>
+                                            </svg>
+                                        </div>
+                                    </td>
+                                    <td class="with-action">
+                                        <div class="hms-grid-item-logo icon-square text-dark flex-shrink-0 me-3">
+                                            <svg class="bi" width="1em" height="1em" style="fill: #212529">
+                                                <use th:href="${'#icon-delete'}"></use>
+                                            </svg>
+                                        </div>
+                                    </td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -218,7 +244,7 @@
                     </h2>
                     <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
-                            <table class="hms-table table">
+                            <table class="hms-table-with-actions table">
                                 <thead class="thead-dark">
                                 <tr>
                                     <th scope="col">#</th>
@@ -226,6 +252,8 @@
                                     <th scope="col"> Model </th>
                                     <th scope="col"> Serial Number </th>
                                     <th scope="col"> Phone Number </th>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -238,9 +266,20 @@
                                     <td><span th:text="${companyPhone.getModel()}"></span></td>
                                     <td><span th:text="${companyPhone.getSerialNumber()}"></span></td>
                                     <td><span th:text="${companyPhone.getPhoneNumber()}"></span></td>
-                                    <td hidden="hidden" th:text="${companyBranchDto.getId()}"></td>
-                                    <td hidden="hidden" th:text="${departmentId}"></td>
-                                    <td hidden="hidden" th:text="${companyPhone.getId()}"></td>
+                                    <td class="with-action">
+                                        <div class="hms-grid-item-logo icon-square text-dark flex-shrink-0 me-3">
+                                            <svg class="bi" width="1em" height="1em" style="fill: #212529">
+                                                <use th:href="${'#icon-edit'}"></use>
+                                            </svg>
+                                        </div>
+                                    </td>
+                                    <td class="with-action">
+                                        <div class="hms-grid-item-logo icon-square text-dark flex-shrink-0 me-3">
+                                            <svg class="bi" width="1em" height="1em" style="fill: #212529">
+                                                <use th:href="${'#icon-delete'}"></use>
+                                            </svg>
+                                        </div>
+                                    </td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -255,5 +294,14 @@
         <p class="link-light no-margin"><small>Copyright 2023-2027</small></p>
     </footer>
 </section>
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="icon-edit" viewBox="0 0 16 16">
+        <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"/>
+    </symbol>
+    <symbol id="icon-delete" viewBox="0 0 16 16">
+        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+    </symbol>
+</svg>
 </body>
 </html>
