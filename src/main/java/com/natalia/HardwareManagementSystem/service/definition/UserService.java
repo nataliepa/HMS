@@ -1,6 +1,7 @@
 package com.natalia.HardwareManagementSystem.service.definition;
 
 
+import com.natalia.HardwareManagementSystem.dto.UserDto;
 import com.natalia.HardwareManagementSystem.dto.UserProfileDto;
 import com.natalia.HardwareManagementSystem.entity.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -32,7 +33,7 @@ public interface UserService extends UserDetailsService {
 
     void enable( User user);
 
-
+    List<UserDto> findAllAndSort();
 
 
 }

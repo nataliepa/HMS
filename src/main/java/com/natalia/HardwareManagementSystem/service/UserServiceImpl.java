@@ -1,11 +1,13 @@
 package com.natalia.HardwareManagementSystem.service;
 
 
+import com.natalia.HardwareManagementSystem.dto.UserDto;
 import com.natalia.HardwareManagementSystem.dto.UserProfileDto;
 import com.natalia.HardwareManagementSystem.entity.CompanyBranch;
 import com.natalia.HardwareManagementSystem.entity.Role;
 import com.natalia.HardwareManagementSystem.entity.User;
 import com.natalia.HardwareManagementSystem.mapper.CompanyBranchMapper;
+import com.natalia.HardwareManagementSystem.mapper.UserMapper;
 import com.natalia.HardwareManagementSystem.repository.RoleRepository;
 import com.natalia.HardwareManagementSystem.repository.UserRepository;
 import com.natalia.HardwareManagementSystem.service.definition.CompanyBranchService;
@@ -153,6 +155,14 @@ public class UserServiceImpl implements UserService {
     public void enable(User user) {
         user.setEnable(1);
         userRepository.save(user);
+    }
+
+    @Override
+    public List<UserDto> findAllAndSort() {
+
+        List<User> userList = userRepository.findAllByOrderByLastName();
+
+        return UserMapper.UserToUserDto(userList);
     }
 
     // μεθοδος που επιστρεφει τυχαια συμβολοσειρα

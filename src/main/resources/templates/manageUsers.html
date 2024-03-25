@@ -59,7 +59,7 @@
                 <li sec:authorize="hasAnyAuthority('SuperAdmin')"><a th:href="@{/index}"
                                                                      class="nav-hms-link nav-link px-2 link-dark active">Manage
                     branches</a></li>
-                <li sec:authorize="hasAnyAuthority('SuperAdmin')"><a th:href="@{/users}"
+                <li sec:authorize="hasAnyAuthority('SuperAdmin')"><a th:href="@{/index}"
                                                                      class="nav-hms-link nav-link px-2 link-dark">Manage
                     users</a></li>
                 <li sec:authorize="hasAnyAuthority('LocalAdmin')"><a th:href="@{/index}"
@@ -74,32 +74,32 @@
     </div>
 
     <div class="container hms-main-content">
-        <h3 class="pb-2 align-self-center">Company branches</h3>
+        <h3 class="pb-2 align-self-center">Users</h3>
         <div class="container px-4 py-5" id="icon-grid">
-            <h5 class="pb-2 border-bottom">Select a branch to view the departments</h5>
+            <h5 class="pb-2 border-bottom">Add, Update or Delete a User</h5>
             <table class="hms-table table">
                 <thead class="thead-dark">
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">City</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">Number</th>
-                    <th scope="col">Postal Code</th>
+                    <th scope="col">UserName</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Company Branch</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:if="${companyBranchDtoList.isEmpty()}">
+                <tr th:if="${userDtoList.isEmpty()}">
                     <td colspan="2"> No CompanyBranches Available</td>
                 </tr>
-                <tr th:each="companyBranch,itrStat : ${companyBranchDtoList}" class="clickable-row">
+                <tr th:each="userDto,itrStat : ${userDtoList}" class="clickable-row">
                     <td><span th:text="${itrStat.index + 1}"></span></td>
-                    <td><span th:text="${companyBranch.getName()}"></span></td>
-                    <td><span th:text="${companyBranch.getCity()}"></span></td>
-                    <td><span th:text="${companyBranch.getAddress()}"></span></td>
-                    <td><span th:text="${companyBranch.getNumber()}"></span></td>
-                    <td><span th:text="${companyBranch.getPostal_code()}"></span></td>
-                    <td hidden="hidden" id="branch-id" th:text="${companyBranch.getId()}"></td>
+                    <td><span th:text="${userDto.getUsername()}"></span></td>
+                    <td><span th:text="${userDto.getLastName()}"></span></td>
+                    <td><span th:text="${userDto.getFirstName()}"></span></td>
+                    <td><span th:text="${userDto.getRole().getName()}"></span></td>
+                    <td><span th:text="${userDto.getCompanyBranch().getName()}"></span></td>
+                    <td hidden="hidden" id="branch-id" th:text="${userDto.getId()}"></td>
                 </tr>
                 </tbody>
             </table>
