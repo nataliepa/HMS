@@ -14,7 +14,7 @@
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script type="text/javascript" th:src="@{/js/manageUsers.js}"></script>
+    <script type="text/javascript" th:src="@{/js/userModalForms.js}"></script>
 </head>
 <body>
 <section id="container">
@@ -78,7 +78,7 @@
         <div class="container px-4 py-5" id="icon-grid">
             <h5 class="pb-2 border-bottom">Add, Update or Delete a User</h5>
             <button type="button"
-                    class="btn btn-outline-dark hms-grid-item-logo icon-square text-dark flex-shrink-0 me-3"
+                    class="btn btn-outline-dark hms-grid-item-logo icon-square flex-shrink-0 me-3"
                     data-bs-toggle="modal"
                     data-bs-target="#addModal"
             >
@@ -114,18 +114,26 @@
                         <button type="button"
                                 class="btn hms-grid-item-logo icon-square text-dark flex-shrink-0 me-3"
                                 data-bs-toggle="modal"
-                                data-bs-target="#editModal">
+                                data-bs-target="#editModal"
+                                th:attr="data-user-id=${userDto.getId()},
+                                         data-user-username=${userDto.getUsername()},
+                                         data-user-lastname=${userDto.getLastName()},
+                                         data-user-firstname=${userDto.getFirstName()},
+                                         data-user-role-id=${userDto.getRole().getName()},
+                                         data-user-branch-id=${userDto.getCompanyBranch().getName()}"
+                        >
                             <svg class="bi" width="1em" height="1em" style="fill: #212529">
                                 <use th:href="${'#icon-edit'}"></use>
                             </svg>
                         </button>
                     </td>
-                    </td>
                     <td class="with-action">
                         <button type="button"
                                 class="btn hms-grid-item-logo icon-square text-dark flex-shrink-0 me-3"
                                 data-bs-toggle="modal"
-                                data-bs-target="#deleteModal">
+                                data-bs-target="#deleteModal"
+                                th:attr="data-user-id=${userDto.getId()}"
+                        >
                             <svg class="bi" width="1em" height="1em" style="fill: #212529">
                                 <use th:href="${'#icon-delete'}"></use>
                             </svg>
@@ -144,13 +152,45 @@
                     <h5 class="modal-title" id="editModalLabel">Edit User</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Update</button>
-                </div>
+                <form th:action="@{/updateUser}" th:object="${manageUserDto}" method="post">
+                    <input type="hidden" id="idUpd" name="id">
+                    <div class="modal-body">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="usernameUpd" class="form-label">Username</label>
+                                <input type="text" class="form-control" id="usernameUpd" name="username" th:field="*{username}">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="passwordUpd" class="form-label">Password</label>
+                                <input type="text" class="form-control" id="passwordUpd" name="password" th:field="*{password}">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="lastNameUpd" class="form-label">Last Name</label>
+                                <input type="text" class="form-control" id="lastNameUpd" name="lastName" th:field="*{lastName}">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="firstNameUpd" class="form-label">First name</label>
+                                <input type="text" class="form-control" id="firstNameUpd" name="firstName" th:field="*{firstName}">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="roleUpd" class="form-label">Role</label>
+                                <select class="form-select form-select-md mb-3" name="role" id="roleUpd">
+                                    <option th:each="role : ${rolesList}" th:text="${role.getName()}" th:value="${role.getName()}"></option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="branchUpd" class="form-label">Company Branch</label>
+                                <select class="form-select form-select-md mb-3" name="companyBranch" id="branchUpd">
+                                    <option th:each="branch : ${companyBranchList}" th:text="${branch.getName()}" th:value="${branch.getName()}"></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-dark">Update</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -161,13 +201,16 @@
                     <h5 class="modal-title" id="deleteModalLabel">Delete User</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Delete</button>
-                </div>
+                <form th:action="@{/deleteUser}" method="post">
+                    <input type="hidden" id="inputDeleteUserId" name="userId">
+                    <div class="modal-body">
+                        Are you sure you want to delete the user?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-dark">Delete</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -178,43 +221,44 @@
                     <h5 class="modal-title" id="addModalLabel">Add User</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-
-                    <form class="row g-3" th:action="@{/addUser}" th:object="${manageUserDto}" method="post" id="addUserForm">
-                        <div class="col-md-6">
-                            <label for="username" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="username" name="username" th:field="*{username}">
+                <form th:action="@{/addUser}" th:object="${manageUserDto}" method="post" id="addUserForm">
+                    <div class="modal-body">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="username" class="form-label">Username</label>
+                                <input type="text" class="form-control" id="username" name="username" th:field="*{username}">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="text" class="form-control" id="password" name="password" th:field="*{password}">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="lastName" class="form-label">Last Name</label>
+                                <input type="text" class="form-control" id="lastName" name="lastName" th:field="*{lastName}">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="firstName" class="form-label">First name</label>
+                                <input type="text" class="form-control" id="firstName" name="firstName" th:field="*{firstName}">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="role" class="form-label">Role</label>
+                                <select class="form-select form-select-md mb-3" name="role" id="role">
+                                    <option th:each="role : ${rolesList}" th:text="${role.getName()}" th:value="${role.getName()}"></option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="branch" class="form-label">Company Branch</label>
+                                <select class="form-select form-select-md mb-3" name="companyBranch" id="branch">
+                                    <option th:each="branch : ${companyBranchList}" th:text="${branch.getName()}" th:value="${branch.getName()}"></option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="col-md-6">
-                            <label for="password" class="form-label">Password</label>
-                            <input type="text" class="form-control" id="password" name="password" th:field="*{password}">
-                        </div>
-                        <div class="col-md-4">
-                            <label for="lastName" class="form-label">Last Name</label>
-                            <input type="text" class="form-control" id="lastName" name="lastName" th:field="*{lastName}">
-                        </div>
-                        <div class="col-md-4">
-                            <label for="firstName" class="form-label">First name</label>
-                            <input type="text" class="form-control" id="firstName" name="firstName" th:field="*{firstName}">
-                        </div>
-                        <div class="col-md-4">
-                            <label for="role" class="form-label">Role</label>
-                            <select name="role" id="role">
-                                <option th:each="role : ${rolesList}" th:text="${role.getName()}"></option>
-                            </select>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="branch" class="form-label">Company Branch</label>
-                            <select name="companyBranch" id="branch">
-                                <option th:each="branch : ${companyBranchList}" th:text="${branch.getName()}"></option>
-                            </select>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" id="addModalBtn">Add</button>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" id="addModalBtn">Add</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
