@@ -14,7 +14,3 @@
 .hms-table-with-actions tbody tr:hover {
     background-color: lightgray;
 }
-
-.hms-table-with-actions tbody td.with-action {
-    cursor: pointer;
-}
