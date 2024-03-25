@@ -40,4 +40,16 @@ public class WorkstationMapper {
 
         return getWorkstationDto;
     }
+
+    public static Workstation workstationDtoWorkstation(WorkstationDto workstationDto) {
+
+
+        Workstation workstation = new Workstation();
+        workstation.setId(workstation.getId());
+        workstation.setName(workstation.getName());
+        workstation.setDepartment(workstation.getDepartment());
+        workstation.setEmployee(workstation.getEmployee());
+
+        return workstation;
+    }
 }

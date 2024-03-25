@@ -12,6 +12,7 @@ import com.natalia.HardwareManagementSystem.entity.equipment.Computer;
 import com.natalia.HardwareManagementSystem.mapper.CompanyBranchMapper;
 import com.natalia.HardwareManagementSystem.mapper.DepartmentMapper;
 import com.natalia.HardwareManagementSystem.mapper.UserMapper;
+import com.natalia.HardwareManagementSystem.mapper.WorkstationMapper;
 import com.natalia.HardwareManagementSystem.mapper.equipment.ComputerMapper;
 import com.natalia.HardwareManagementSystem.service.definition.*;
 import org.modelmapper.ModelMapper;
@@ -94,7 +95,7 @@ public class EquipmentController {
     }
 
     @PostMapping(value = {"/addComputer"})
-    public String addComputer(Model model, @RequestParam(required = false, name = "addComputerDto") ComputerDto computerDto)
+    public String addComputer(Model model, @ModelAttribute(name = "computerDto") ComputerDto computerDto)
     {
         Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
         String username = loggedInUser.getName();  // username χρηστη
@@ -103,7 +104,9 @@ public class EquipmentController {
 
         if (role.equals("[SuperAdmin]")) { // "SuperAdmin"
 
-            if(equipmentService.addComputer(computerDto) != null) {
+            WorkstationDto workstationDto = workstationService.findById(computerDto.getWorkstationId());
+
+            if(equipmentService.addComputer(computerDto, workstationDto) != null) {
                 model.addAttribute("savedMessage", "");
             } else {
                 model.addAttribute("savedMessage", "Computer already exists");
@@ -137,14 +140,14 @@ public class EquipmentController {
     }
 
     @PostMapping(value = {"/deleteComputer"})
-    public String deleteUser(Model model, @RequestParam(name = "computerId") int computerId) {
+    public String deleteUser(Model model, @ModelAttribute(name = "computerDto") ComputerDto computerDto) {
         Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
         String username = loggedInUser.getName();  // username χρηστη
         User user = userService.findByUsername(username);  // ευρεση του χρηστη
         String role = loggedInUser.getAuthorities().toString();
 
         if (role.equals("[SuperAdmin]")) { // "SuperAdmin"
-            if(equipmentService.deleteComputer(computerId).isEmpty()) {
+            if(equipmentService.deleteComputer(computerDto.getId()).isEmpty()) {
                 model.addAttribute("deleteMessage", "");
             } else {
                 model.addAttribute("deleteMessage", "Computer not found");

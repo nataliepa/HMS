@@ -14,4 +14,5 @@ public abstract class EquipmentDto {
     private String manufacturer;
     private String model;
     private String serialNumber;
+    private int workstationId;
 }

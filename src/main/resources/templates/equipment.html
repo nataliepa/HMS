@@ -379,27 +379,28 @@
                     <div class="row g-3">
                         <div class="col-md-6">
                             <label for="inputAddComputerManufacturer" class="form-label">Manufacturer</label>
-                            <input type="text" class="form-control" name="manufacturer" id="inputAddComputerManufacturer">
+                            <input type="text" class="form-control" name="manufacturer" id="inputAddComputerManufacturer" th:field="*{manufacturer}">
                         </div>
                         <div class="col-md-6">
                             <label for="inputAddComputerModel" class="form-label">Model</label>
-                            <input type="text" class="form-control" name="model" id="inputAddComputerModel">
+                            <input type="text" class="form-control" name="model" id="inputAddComputerModel" th:field="*{model}">
                         </div>
                         <div class="col-md-12">
                             <label for="inputAddComputerSerialNumber" class="form-label">Serial Number</label>
-                            <input type="text" class="form-control" name="serialNumber" id="inputAddComputerSerialNumber">
+                            <input type="text" class="form-control" name="serialNumber" id="inputAddComputerSerialNumber" th:field="*{serialNumber}">
                         </div>
                         <div class="col-md-4">
                             <label for="inputAddComputerCpu" class="form-label">CPU</label>
-                            <input type="text" class="form-control" name="cpu" id="inputAddComputerCpu">
+                            <input type="text" class="form-control" name="cpu" id="inputAddComputerCpu" th:field="*{cpu}">
                         </div>
                         <div class="col-md-4">
                             <label for="inputAddComputerRam" class="form-label">RAM</label>
-                            <input type="text" class="form-control" name="ram" id="inputAddComputerRam">
+                            <input type="text" class="form-control" name="ram" id="inputAddComputerRam" th:field="*{ram}">
                         </div>
                         <div class="col-md-4">
                             <label for="inputAddComputerOs" class="form-label">OS</label>
-                            <input type="text" class="form-control" name="operatingSystem" id="inputAddComputerOs">
+                            <input type="text" class="form-control" name="operatingSystem" id="inputAddComputerOs" th:field="*{operatingSystem}">
+                            <input type="hidden" id="addWorkstationId" name="workstationId" th:field="${workstationDto.workstationId}">
                         </div>
                     </div>
                 </div>
@@ -424,27 +425,28 @@
                     <div class="row g-3">
                         <div class="col-md-6">
                             <label for="inputEditComputerManufacturer" class="form-label">Manufacturer</label>
-                            <input type="text" class="form-control" name="manufacturer" id="inputEditComputerManufacturer">
+                            <input type="text" class="form-control" name="manufacturer" id="inputEditComputerManufacturer" th:field="*{manufacturer}">
                         </div>
                         <div class="col-md-6">
                             <label for="inputEditComputerModel" class="form-label">Model</label>
-                            <input type="text" class="form-control" name="model" id="inputEditComputerModel">
+                            <input type="text" class="form-control" name="model" id="inputEditComputerModel" th:field="*{model}">
                         </div>
                         <div class="col-md-12">
                             <label for="inputEditComputerSerialNumber" class="form-label">Serial Number</label>
-                            <input type="text" class="form-control" name="serialNumber" id="inputEditComputerSerialNumber">
+                            <input type="text" class="form-control" name="serialNumber" id="inputEditComputerSerialNumber" th:field="*{serialNumber}">
                         </div>
                         <div class="col-md-4">
                             <label for="inputEditComputerCpu" class="form-label">CPU</label>
-                            <input type="text" class="form-control" name="cpu" id="inputEditComputerCpu">
+                            <input type="text" class="form-control" name="cpu" id="inputEditComputerCpu" th:field="*{cpu}">
                         </div>
                         <div class="col-md-4">
                             <label for="inputEditComputerRam" class="form-label">RAM</label>
-                            <input type="text" class="form-control" name="ram" id="inputEditComputerRam">
+                            <input type="text" class="form-control" name="ram" id="inputEditComputerRam" th:field="*{ram}">
                         </div>
                         <div class="col-md-4">
                             <label for="inputEditComputerOs" class="form-label">OS</label>
-                            <input type="text" class="form-control" name="operatingSystem" id="inputEditComputerOs">
+                            <input type="text" class="form-control" name="operatingSystem" id="inputEditComputerOs" th:field="*{operatingSystem}">
+                            <input type="hidden" id="updateWorkstationId" name="workstationId" th:field="${workstationDto.workstationId}">
                         </div>
                     </div>
                 </div>
@@ -463,8 +465,9 @@
                 <h5 class="modal-title" id="deleteComputerModalLabel">Delete computer</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form th:action="@{/delteUser}" method="post">
-                <input type="hidden" id="inputDeleteComputerId" name="computerId">
+            <form th:action="@{/deleteUser}" th:object="${computerDto}" method="post">
+                <input type="hidden" id="inputDeleteComputerId" name="computerId" th:field="*{id}">
+                <input type="hidden" id="deleteWorkstationId" name="workstationId" th:field="${workstationDto.workstationId}">
                 <div class="modal-body">
                     Are you sure you want to delete the computer?
                 </div>

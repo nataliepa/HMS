@@ -65,7 +65,7 @@ public class ManageUsersController {
     }
 
     @PostMapping(value = {"/addUser"})
-    public String addUser(Model model, @ModelAttribute("addUserDto") ManageUserDto manageUserDto) {
+    public String addUser(Model model, @ModelAttribute("manageUserDto") ManageUserDto manageUserDto) {
         Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
         String username = loggedInUser.getName();  // username χρηστη
         User user = userService.findByUsername(username);  // ευρεση του χρηστη
@@ -91,7 +91,7 @@ public class ManageUsersController {
     }
 
     @PostMapping(value = {"/updateUser"})
-    public String updateUser(Model model, @ModelAttribute("updateUserDto") ManageUserDto manageUserDto) {
+    public String updateUser(Model model, @ModelAttribute("manageUserDto") ManageUserDto manageUserDto) {
         Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
         String username = loggedInUser.getName();  // username χρηστη
         User user = userService.findByUsername(username);  // ευρεση του χρηστη
@@ -119,7 +119,7 @@ public class ManageUsersController {
     }
 
     @PostMapping(value = {"/deleteUser"})
-    public String deleteUser(Model model, @RequestParam(name = "userId") int userId) {
+    public String deleteUser(Model model, @ModelAttribute("manageUserDto") ManageUserDto manageUserDto) {
         Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
         String username = loggedInUser.getName();  // username χρηστη
         User user = userService.findByUsername(username);  // ευρεση του χρηστη
@@ -127,10 +127,10 @@ public class ManageUsersController {
 
         if (role.equals("[SuperAdmin]")) { // "SuperAdmin"
 
-            User findUser = userService.findById(userId);
+            User findUser = userService.findById(manageUserDto.getId());
 
             if(findUser != null) {
-                userService.delete(userId);
+                userService.delete(manageUserDto.getId());
                 model.addAttribute("deleteMessage", "");
             } else {
                 model.addAttribute("deleteMessage", "User not found");

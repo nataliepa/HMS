@@ -3,9 +3,12 @@ package com.natalia.HardwareManagementSystem.service;
 import com.natalia.HardwareManagementSystem.dto.equipment.CompanyPhoneDto;
 import com.natalia.HardwareManagementSystem.dto.equipment.ComputerDto;
 import com.natalia.HardwareManagementSystem.dto.equipment.MonitorDto;
+import com.natalia.HardwareManagementSystem.dto.workstation.WorkstationDto;
+import com.natalia.HardwareManagementSystem.entity.Workstation;
 import com.natalia.HardwareManagementSystem.entity.equipment.CompanyPhone;
 import com.natalia.HardwareManagementSystem.entity.equipment.Computer;
 import com.natalia.HardwareManagementSystem.entity.equipment.Monitor;
+import com.natalia.HardwareManagementSystem.mapper.WorkstationMapper;
 import com.natalia.HardwareManagementSystem.mapper.equipment.CompanyPhoneMapper;
 import com.natalia.HardwareManagementSystem.mapper.equipment.ComputerMapper;
 import com.natalia.HardwareManagementSystem.mapper.equipment.MonitorMapper;
@@ -65,22 +68,25 @@ public class EquipmentServiceImpl implements EquipmentService {
     }
 
     @Override
-    public ComputerDto addComputer(ComputerDto computerDto) {
+    public ComputerDto addComputer(ComputerDto computerDto, WorkstationDto workstationDto) {
         Computer computer = ComputerMapper.computerDtoToComputer(computerDto);
+        computer.setWorkstation(WorkstationMapper.workstationDtoWorkstation(workstationDto));
 
         return ComputerMapper.computerToComputerDto(computerRepo.save(computer));
     }
 
     @Override
-    public MonitorDto addMonitor(MonitorDto monitorDto) {
+    public MonitorDto addMonitor(MonitorDto monitorDto, WorkstationDto workstationDto) {
         Monitor monitor = MonitorMapper.monitorDtoToMonitor(monitorDto);
+        monitor.setWorkstation(WorkstationMapper.workstationDtoWorkstation(workstationDto));
 
         return MonitorMapper.monitorToMonitorDto(monitorRepo.save(monitor));
     }
 
     @Override
-    public CompanyPhoneDto addCompanyPhone(CompanyPhoneDto companyPhoneDto) {
+    public CompanyPhoneDto addCompanyPhone(CompanyPhoneDto companyPhoneDto, WorkstationDto workstationDto) {
         CompanyPhone companyPhone = CompanyPhoneMapper.companyPhoneDtoToCompanyPhone(companyPhoneDto);
+        companyPhone.setWorkstation(WorkstationMapper.workstationDtoWorkstation(workstationDto));
 
         return CompanyPhoneMapper.companyPhoneToCompanyPhoneDto(companyPhoneRepo.save(companyPhone));
     }
