@@ -20,6 +20,15 @@ $( document ).ready(function() {
         $('#inputEditComputerOs').val(computerOs);
     });
 
+    const deleteComputerModal = $('#deleteComputerModal');
+    deleteComputerModal.on('show.bs.modal', function (event) {
+        const button = event.relatedTarget;
+
+        const computerId = $(button).data('computerId');
+
+        $('#inputDeleteComputerId').val(computerId);
+    });
+
     const editMonitorModal = $('#editMonitorModal');
     editMonitorModal.on('show.bs.modal', function (event) {
         const button = event.relatedTarget;
@@ -39,6 +48,15 @@ $( document ).ready(function() {
         $('#inputEditMonitorResolution').val(monitorResolution);
     });
 
+    const deleteMonitorModal = $('#deleteMonitorModal');
+    deleteMonitorModal.on('show.bs.modal', function (event) {
+        const button = event.relatedTarget;
+
+        const monitorId = $(button).data('monitorId');
+
+        $('#inputDeleteMonitorId').val(monitorId);
+    });
+
     const editCompanyPhoneModal = $('#editCompanyPhoneModal');
     editCompanyPhoneModal.on('show.bs.modal', function (event) {
         const button = event.relatedTarget;
@@ -54,5 +72,14 @@ $( document ).ready(function() {
         $('#inputEditCompanyPhoneModel').val(companyPhoneModel);
         $('#inputEditCompanyPhoneSerialNumber').val(companyPhoneSerialNumber);
         $('#inputEditCompanyPhonePhoneNumber').val(companyPhoneNumber);
+    });
+
+    const deleteCompanyPhoneModal = $('#deleteCompanyPhoneModal');
+    deleteCompanyPhoneModal.on('show.bs.modal', function (event) {
+        const button = event.relatedTarget;
+
+        const companyPhoneId = $(button).data('companyPhoneId');
+
+        $('#inputDeleteCompanyPhoneId').val(companyPhoneId);
     });
 });

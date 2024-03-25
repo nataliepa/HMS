@@ -197,6 +197,7 @@
                                                 class="btn hms-grid-item-logo icon-square text-dark flex-shrink-0 me-3"
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#deleteComputerModal"
+                                                th:attr="data-computer-id=${computer.getId()}"
                                         >
                                             <svg class="bi" width="1em" height="1em" style="fill: #212529">
                                                 <use th:href="${'#icon-delete'}"></use>
@@ -272,6 +273,7 @@
                                                 class="btn hms-grid-item-logo icon-square text-dark flex-shrink-0 me-3"
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#deleteMonitorModal"
+                                                th:attr="data-monitor-id=${monitor.getId()}"
                                         >
                                             <svg class="bi" width="1em" height="1em" style="fill: #212529">
                                                 <use th:href="${'#icon-delete'}"></use>
@@ -344,6 +346,7 @@
                                                 class="btn hms-grid-item-logo icon-square text-dark flex-shrink-0 me-3"
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#deleteCompanyPhoneModal"
+                                                th:attr="data-company-phone-id=${companyPhone.getId()}"
                                         >
                                             <svg class="bi" width="1em" height="1em" style="fill: #212529">
                                                 <use th:href="${'#icon-delete'}"></use>
@@ -460,13 +463,16 @@
                 <h5 class="modal-title" id="deleteComputerModalLabel">Delete computer</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-dark">Delete</button>
-            </div>
+            <form>
+                <input type="hidden" id="inputDeleteComputerId" name="computerId">
+                <div class="modal-body">
+                    Are you sure you want to delete the computer?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-dark">Delete</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -558,13 +564,16 @@
                 <h5 class="modal-title" id="deleteMonitorModalLabel">Delete Monitor</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-dark">Delete</button>
-            </div>
+            <form>
+                <input type="hidden" id="inputDeleteMonitorId" name="monitorId">
+                <div class="modal-body">
+                    Are you sure you want to delete the monitor?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-dark">Delete</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -648,13 +657,16 @@
                 <h5 class="modal-title" id="deleteCompanyPhoneModalLabel">Delete company phone</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-dark">Delete</button>
-            </div>
+            <form>
+                <input type="hidden" id="inputDeleteCompanyPhoneId" name="monitorId">
+                <div class="modal-body">
+                    Are you sure you want to delete the company phone?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-dark">Delete</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
