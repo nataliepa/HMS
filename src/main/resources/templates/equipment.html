@@ -374,7 +374,7 @@
                 <h5 class="modal-title" id="addComputerModalLabel">Add computer</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form th:action="@{'/addComputer'(branchId=${branchId},departmentId=${departmentDto.getId()},workstationId=${workstationDto.getWorkstationId()})}" th:object="${computerDto}" method="post">
+            <form th:action="@{'/addComputer'(branchId=${branchId},departmentId=${departmentDto.id},workstationId=${workstationDto.workstationId})}" th:object="${computerDto}" method="post">
                 <div class="modal-body">
                     <div class="row g-3">
                         <div class="col-md-6">
@@ -400,7 +400,6 @@
                         <div class="col-md-4">
                             <label for="inputAddComputerOs" class="form-label">OS</label>
                             <input type="text" class="form-control" name="operatingSystem" id="inputAddComputerOs" th:field="*{operatingSystem}">
-                            <input type="hidden" id="addWorkstationId" name="workstationId" th:field="${workstationDto.workstationId}">
                         </div>
                     </div>
                 </div>
@@ -420,7 +419,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form th:action="@{'/updateComputer'(branchId=${branchId},departmentId=${departmentDto.getId()},workstationId=${workstationDto.getWorkstationId()})}" th:object="${computerDto}" method="post">
-                <input type="hidden" id="inputEditComputerId" name="computerId">
+                <input type="hidden" id="inputEditComputerId" name="computerId" th:field="*{id}">
                 <div class="modal-body">
                     <div class="row g-3">
                         <div class="col-md-6">
@@ -446,7 +445,6 @@
                         <div class="col-md-4">
                             <label for="inputEditComputerOs" class="form-label">OS</label>
                             <input type="text" class="form-control" name="operatingSystem" id="inputEditComputerOs" th:field="*{operatingSystem}">
-                            <input type="hidden" id="updateWorkstationId" name="workstationId" th:field="${workstationDto.workstationId}">
                         </div>
                     </div>
                 </div>
@@ -467,7 +465,6 @@
             </div>
             <form th:action="@{'/deleteComputer'(branchId=${branchId},departmentId=${departmentDto.getId()},workstationId=${workstationDto.getWorkstationId()})}" th:object="${computerDto}" method="post">
                 <input type="hidden" id="inputDeleteComputerId" name="computerId" th:field="*{id}">
-                <input type="hidden" id="deleteWorkstationId" name="workstationId" th:field="${workstationDto.workstationId}">
                 <div class="modal-body">
                     Are you sure you want to delete the computer?
                 </div>

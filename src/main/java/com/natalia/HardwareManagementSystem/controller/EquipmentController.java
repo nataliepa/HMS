@@ -95,10 +95,11 @@ public class EquipmentController {
     }
 
     @PostMapping(value = {"/addComputer"})
-    public String addComputer(Model model, @ModelAttribute(name = "computerDto") ComputerDto computerDto,
+    public String addComputer(Model model,
                               @RequestParam(required = false, name = "branchId") String branchId,
                               @RequestParam(name = "departmentId") String departmentId,
-                              @RequestParam(name = "workstationId") String workstationId)
+                              @RequestParam(name = "workstationId") String workstationId,
+                              @ModelAttribute(name = "computerDto") ComputerDto computerDto)
     {
         Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
         String username = loggedInUser.getName();  // username χρηστη
@@ -107,7 +108,7 @@ public class EquipmentController {
 
         if (role.equals("[SuperAdmin]")) { // "SuperAdmin"
 
-            Workstation workstation = workstationService.findWorkstationById(computerDto.getWorkstationId());
+            Workstation workstation = workstationService.findWorkstationById(Integer.parseInt(workstationId));
 
             if(equipmentService.addComputer(computerDto, workstation) != null) {
                 model.addAttribute("savedMessage", "");
