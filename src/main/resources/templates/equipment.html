@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="/css/bootstrap.css" th:href="@{/css/hms-table.css}"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script type="text/javascript" th:src="@{/js/equipmentModalForms.js}"></script>
 </head>
 <body>
 <section id="container">
@@ -178,6 +179,13 @@
                                                 class="btn hms-grid-item-logo icon-square text-dark flex-shrink-0 me-3"
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#editComputerModal"
+                                                th:attr="data-computer-id=${computer.getId()},
+                                                    data-computer-manufacturer=${computer.getManufacturer()},
+                                                    data-computer-model=${computer.getModel()},
+                                                    data-computer-serial-number=${computer.getSerialNumber()},
+                                                    data-computer-cpu=${computer.getCpu()},
+                                                    data-computer-ram=${computer.getRam()},
+                                                    data-computer-os=${computer.getOperatingSystem()}"
                                         >
                                             <svg class="bi" width="1em" height="1em" style="fill: #212529">
                                                 <use th:href="${'#icon-edit'}"></use>
@@ -247,6 +255,12 @@
                                                 class="btn hms-grid-item-logo icon-square text-dark flex-shrink-0 me-3"
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#editMonitorModal"
+                                                th:attr="data-monitor-id=${monitor.getId()},
+                                                    data-monitor-manufacturer=${monitor.getManufacturer()},
+                                                    data-monitor-model=${monitor.getModel()},
+                                                    data-monitor-serial-number=${monitor.getSerialNumber()},
+                                                    data-monitor-screen-size=${monitor.getScreenSize()},
+                                                    data-monitor-resolution=${monitor.getScreenResolution()}"
                                         >
                                             <svg class="bi" width="1em" height="1em" style="fill: #212529">
                                                 <use th:href="${'#icon-edit'}"></use>
@@ -257,7 +271,8 @@
                                         <button type="button"
                                                 class="btn hms-grid-item-logo icon-square text-dark flex-shrink-0 me-3"
                                                 data-bs-toggle="modal"
-                                                data-bs-target="#deleteMonitorModal">
+                                                data-bs-target="#deleteMonitorModal"
+                                        >
                                             <svg class="bi" width="1em" height="1em" style="fill: #212529">
                                                 <use th:href="${'#icon-delete'}"></use>
                                             </svg>
@@ -312,7 +327,13 @@
                                         <button type="button"
                                                 class="btn hms-grid-item-logo icon-square text-dark flex-shrink-0 me-3"
                                                 data-bs-toggle="modal"
-                                                data-bs-target="#editCompanyPhoneModal">
+                                                data-bs-target="#editCompanyPhoneModal"
+                                                th:attr="data-company-phone-id=${companyPhone.getId()},
+                                                    data-company-phone-manufacturer=${companyPhone.getManufacturer()},
+                                                    data-company-phone-model=${companyPhone.getModel()},
+                                                    data-company-phone-serial-number=${companyPhone.getSerialNumber()},
+                                                    data-company-phone-number=${companyPhone.getPhoneNumber()}"
+                                        >
                                             <svg class="bi" width="1em" height="1em" style="fill: #212529">
                                                 <use th:href="${'#icon-edit'}"></use>
                                             </svg>
@@ -394,13 +415,41 @@
                 <h5 class="modal-title" id="editComputerModalLabel">Edit computer</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-dark">Update</button>
-            </div>
+            <form>
+                <input type="hidden" id="inputEditComputerId" name="computerId">
+                <div class="modal-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="inputEditComputerManufacturer" class="form-label">Manufacturer</label>
+                            <input type="text" class="form-control" name="computerManufacturer" id="inputEditComputerManufacturer">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputEditComputerModel" class="form-label">Model</label>
+                            <input type="text" class="form-control" name="computerModel" id="inputEditComputerModel">
+                        </div>
+                        <div class="col-md-12">
+                            <label for="inputEditComputerSerialNumber" class="form-label">Serial Number</label>
+                            <input type="text" class="form-control" name="computerSerialNumber" id="inputEditComputerSerialNumber">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="inputEditComputerCpu" class="form-label">CPU</label>
+                            <input type="text" class="form-control" name="computerCpu" id="inputEditComputerCpu">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="inputEditComputerRam" class="form-label">RAM</label>
+                            <input type="text" class="form-control" name="computerRam" id="inputEditComputerRam">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="inputEditComputerOs" class="form-label">OS</label>
+                            <input type="text" class="form-control" name="computerOs" id="inputEditComputerOs">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-dark">Update</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -468,13 +517,37 @@
                 <h5 class="modal-title" id="editMonitorModalLabel">Edit Monitor</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-dark">Update</button>
-            </div>
+            <form>
+                <input type="hidden" id="inputEditMonitorId" name="monitorId">
+                <div class="modal-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="inputEditMonitorManufacturer" class="form-label">Manufacturer</label>
+                            <input type="text" class="form-control" name="monitorManufacturer" id="inputEditMonitorManufacturer">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputEditMonitorModel" class="form-label">Model</label>
+                            <input type="text" class="form-control" name="monitorModel" id="inputEditMonitorModel">
+                        </div>
+                        <div class="col-md-12">
+                            <label for="inputEditMonitorSerialNumber" class="form-label">Serial Number</label>
+                            <input type="text" class="form-control" name="monitorSerialNumber" id="inputEditMonitorSerialNumber">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputEditMonitorScreenSize" class="form-label">Screen size</label>
+                            <input type="text" class="form-control" name="monitorScreenSize" id="inputEditMonitorScreenSize">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputEditMonitorResolution" class="form-label">Resolution</label>
+                            <input type="text" class="form-control" name="monitorResolution" id="inputEditMonitorResolution">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-dark">Update</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -507,19 +580,19 @@
                     <div class="row g-3">
                         <div class="col-md-6">
                             <label for="inputAddCompanyPhoneManufacturer" class="form-label">Manufacturer</label>
-                            <input type="text" class="form-control" name="monitorManufacturer" id="inputAddCompanyPhoneManufacturer">
+                            <input type="text" class="form-control" name="companyPhoneManufacturer" id="inputAddCompanyPhoneManufacturer">
                         </div>
                         <div class="col-md-6">
                             <label for="inputAddCompanyPhoneModel" class="form-label">Model</label>
-                            <input type="text" class="form-control" name="monitorModel" id="inputAddCompanyPhoneModel">
+                            <input type="text" class="form-control" name="companyPhoneModel" id="inputAddCompanyPhoneModel">
                         </div>
                         <div class="col-md-12">
                             <label for="inputAddCompanyPhoneSerialNumber" class="form-label">Serial Number</label>
-                            <input type="text" class="form-control" name="monitorSerialNumber" id="inputAddCompanyPhoneSerialNumber">
+                            <input type="text" class="form-control" name="companyPhoneSerialNumber" id="inputAddCompanyPhoneSerialNumber">
                         </div>
                         <div class="col-md-12">
                             <label for="inputAddCompanyPhonePhoneNumber" class="form-label">Phone number</label>
-                            <input type="text" class="form-control" name="monitorPhoneNumber" id="inputAddCompanyPhonePhoneNumber">
+                            <input type="text" class="form-control" name="companyPhonePhoneNumber" id="inputAddCompanyPhonePhoneNumber">
                         </div>
                     </div>
                 </div>
@@ -538,13 +611,33 @@
                 <h5 class="modal-title" id="editCompanyPhoneModalLabel">Edit company phone</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-dark">Update</button>
-            </div>
+            <form>
+                <input type="hidden" id="inputEditCompanyPhoneId" name="companyPhoneId">
+                <div class="modal-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="inputEditCompanyPhoneManufacturer" class="form-label">Manufacturer</label>
+                            <input type="text" class="form-control" name="companyPhoneManufacturer" id="inputEditCompanyPhoneManufacturer">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputEditCompanyPhoneModel" class="form-label">Model</label>
+                            <input type="text" class="form-control" name="companyPhoneModel" id="inputEditCompanyPhoneModel">
+                        </div>
+                        <div class="col-md-12">
+                            <label for="inputEditCompanyPhoneSerialNumber" class="form-label">Serial Number</label>
+                            <input type="text" class="form-control" name="companyPhoneSerialNumber" id="inputEditCompanyPhoneSerialNumber">
+                        </div>
+                        <div class="col-md-12">
+                            <label for="inputEditCompanyPhonePhoneNumber" class="form-label">Phone number</label>
+                            <input type="text" class="form-control" name="companyPhonePhoneNumber" id="inputEditCompanyPhonePhoneNumber">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-dark">Update</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
