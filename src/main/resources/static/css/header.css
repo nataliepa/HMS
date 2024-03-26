@@ -18,9 +18,15 @@
     object-fit: cover;
 }
 
+.cover-title {
+    text-align: -webkit-center;
+    padding-top: 50px;
+    color: white;
+}
+
 .hms-main-content {
     background-color: #fff;
-    margin-top: 150px;
+    margin-top: 50px;
     padding: 25px;
     box-shadow: 1px 1px 10px 0 #8d8d8d;
     border-radius: 10px 10px 0 0;
