@@ -484,34 +484,34 @@
                 <h5 class="modal-title" id="addMonitorModalLabel">Add monitor</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form>
+            <form th:action="@{'/addMonitor'(branchId=${branchId},departmentId=${departmentDto.id},workstationId=${workstationDto.workstationId})}" th:object="${monitorDto}" method="post">
                 <div class="modal-body">
                     <div class="row g-3">
                         <div class="col-md-6">
                             <label for="inputAddMonitorManufacturer" class="form-label">Manufacturer</label>
-                            <input type="text" class="form-control" name="monitorManufacturer" id="inputAddMonitorManufacturer">
+                            <input type="text" class="form-control" name="monitorManufacturer" id="inputAddMonitorManufacturer" th:field="*{manufacturer}">
                         </div>
                         <div class="col-md-6">
                             <label for="inputAddMonitorModel" class="form-label">Model</label>
-                            <input type="text" class="form-control" name="monitorModel" id="inputAddMonitorModel">
+                            <input type="text" class="form-control" name="monitorModel" id="inputAddMonitorModel" th:field="*{model}">
                         </div>
                         <div class="col-md-12">
                             <label for="inputAddMonitorSerialNumber" class="form-label">Serial Number</label>
-                            <input type="text" class="form-control" name="monitorSerialNumber" id="inputAddMonitorSerialNumber">
+                            <input type="text" class="form-control" name="monitorSerialNumber" id="inputAddMonitorSerialNumber" th:field="*{serialNumber}">
                         </div>
                         <div class="col-md-6">
                             <label for="inputAddMonitorScreenSize" class="form-label">Screen size</label>
-                            <input type="text" class="form-control" name="monitorScreenSize" id="inputAddMonitorScreenSize">
+                            <input type="text" class="form-control" name="monitorScreenSize" id="inputAddMonitorScreenSize" th:field="*{screenSize}">
                         </div>
                         <div class="col-md-6">
                             <label for="inputAddMonitorResolution" class="form-label">Resolution</label>
-                            <input type="text" class="form-control" name="monitorResolution" id="inputAddMonitorResolution">
+                            <input type="text" class="form-control" name="monitorResolution" id="inputAddMonitorResolution" th:field="*{screenResolution}">
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-dark">Add</button>
+                    <button type="submit" class="btn btn-dark">Add</button>
                 </div>
             </form>
         </div>
@@ -524,35 +524,35 @@
                 <h5 class="modal-title" id="editMonitorModalLabel">Edit Monitor</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form>
-                <input type="hidden" id="inputEditMonitorId" name="monitorId">
+            <form th:action="@{'/updateMonitor'(branchId=${branchId},departmentId=${departmentDto.id},workstationId=${workstationDto.workstationId})}" th:object="${monitorDto}" method="post">
+            <input type="hidden" id="inputEditMonitorId" name="monitorId" th:field="*{id}">
                 <div class="modal-body">
                     <div class="row g-3">
                         <div class="col-md-6">
                             <label for="inputEditMonitorManufacturer" class="form-label">Manufacturer</label>
-                            <input type="text" class="form-control" name="monitorManufacturer" id="inputEditMonitorManufacturer">
+                            <input type="text" class="form-control" name="monitorManufacturer" id="inputEditMonitorManufacturer" th:field="*{manufacturer}">
                         </div>
                         <div class="col-md-6">
                             <label for="inputEditMonitorModel" class="form-label">Model</label>
-                            <input type="text" class="form-control" name="monitorModel" id="inputEditMonitorModel">
+                            <input type="text" class="form-control" name="monitorModel" id="inputEditMonitorModel" th:field="*{model}">
                         </div>
                         <div class="col-md-12">
                             <label for="inputEditMonitorSerialNumber" class="form-label">Serial Number</label>
-                            <input type="text" class="form-control" name="monitorSerialNumber" id="inputEditMonitorSerialNumber">
+                            <input type="text" class="form-control" name="monitorSerialNumber" id="inputEditMonitorSerialNumber" th:field="*{serialNumber}">
                         </div>
                         <div class="col-md-6">
                             <label for="inputEditMonitorScreenSize" class="form-label">Screen size</label>
-                            <input type="text" class="form-control" name="monitorScreenSize" id="inputEditMonitorScreenSize">
+                            <input type="text" class="form-control" name="monitorScreenSize" id="inputEditMonitorScreenSize" th:field="*{screenSize}">
                         </div>
                         <div class="col-md-6">
                             <label for="inputEditMonitorResolution" class="form-label">Resolution</label>
-                            <input type="text" class="form-control" name="monitorResolution" id="inputEditMonitorResolution">
+                            <input type="text" class="form-control" name="monitorResolution" id="inputEditMonitorResolution" th:field="*{screenResolution}">
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-dark">Update</button>
+                    <button type="submit" class="btn btn-dark">Update</button>
                 </div>
             </form>
         </div>
@@ -565,14 +565,14 @@
                 <h5 class="modal-title" id="deleteMonitorModalLabel">Delete Monitor</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form>
-                <input type="hidden" id="inputDeleteMonitorId" name="monitorId">
+            <form th:action="@{'/deleteMonitor'(branchId=${branchId},departmentId=${departmentDto.id},workstationId=${workstationDto.workstationId})}" th:object="${monitorDto}" method="post">
+            <input type="hidden" id="inputDeleteMonitorId" name="monitorId" th:field="*{id}">
                 <div class="modal-body">
                     Are you sure you want to delete the monitor?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-dark">Delete</button>
+                    <button type="submit" class="btn btn-dark">Delete</button>
                 </div>
             </form>
         </div>
@@ -585,30 +585,30 @@
                 <h5 class="modal-title" id="addCompanyPhoneModalLabel">Add company phone</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form>
-                <div class="modal-body">
+            <form th:action="@{'/addCompanyPhone'(branchId=${branchId},departmentId=${departmentDto.id},workstationId=${workstationDto.workstationId})}" th:object="${companyPhoneDto}" method="post">
+            <div class="modal-body">
                     <div class="row g-3">
                         <div class="col-md-6">
                             <label for="inputAddCompanyPhoneManufacturer" class="form-label">Manufacturer</label>
-                            <input type="text" class="form-control" name="companyPhoneManufacturer" id="inputAddCompanyPhoneManufacturer">
+                            <input type="text" class="form-control" name="companyPhoneManufacturer" id="inputAddCompanyPhoneManufacturer" th:field="*{manufacturer}">
                         </div>
                         <div class="col-md-6">
                             <label for="inputAddCompanyPhoneModel" class="form-label">Model</label>
-                            <input type="text" class="form-control" name="companyPhoneModel" id="inputAddCompanyPhoneModel">
+                            <input type="text" class="form-control" name="companyPhoneModel" id="inputAddCompanyPhoneModel" th:field="*{model}">
                         </div>
                         <div class="col-md-12">
                             <label for="inputAddCompanyPhoneSerialNumber" class="form-label">Serial Number</label>
-                            <input type="text" class="form-control" name="companyPhoneSerialNumber" id="inputAddCompanyPhoneSerialNumber">
+                            <input type="text" class="form-control" name="companyPhoneSerialNumber" id="inputAddCompanyPhoneSerialNumber" th:field="*{serialNumber}">
                         </div>
                         <div class="col-md-12">
                             <label for="inputAddCompanyPhonePhoneNumber" class="form-label">Phone number</label>
-                            <input type="text" class="form-control" name="companyPhonePhoneNumber" id="inputAddCompanyPhonePhoneNumber">
+                            <input type="text" class="form-control" name="companyPhonePhoneNumber" id="inputAddCompanyPhonePhoneNumber" th:field="*{phoneNumber}">
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-dark">Add</button>
+                    <button type="submit" class="btn btn-dark">Add</button>
                 </div>
             </form>
         </div>
@@ -621,31 +621,31 @@
                 <h5 class="modal-title" id="editCompanyPhoneModalLabel">Edit company phone</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form>
-                <input type="hidden" id="inputEditCompanyPhoneId" name="companyPhoneId">
+            <form th:action="@{'/updateCompanyPhone'(branchId=${branchId},departmentId=${departmentDto.id},workstationId=${workstationDto.workstationId})}" th:object="${companyPhoneDto}" method="post">
+                <input type="hidden" id="inputEditCompanyPhoneId" name="companyPhoneId" th:field="*{id}">
                 <div class="modal-body">
                     <div class="row g-3">
                         <div class="col-md-6">
                             <label for="inputEditCompanyPhoneManufacturer" class="form-label">Manufacturer</label>
-                            <input type="text" class="form-control" name="companyPhoneManufacturer" id="inputEditCompanyPhoneManufacturer">
+                            <input type="text" class="form-control" name="companyPhoneManufacturer" id="inputEditCompanyPhoneManufacturer" th:field="*{manufacturer}">
                         </div>
                         <div class="col-md-6">
                             <label for="inputEditCompanyPhoneModel" class="form-label">Model</label>
-                            <input type="text" class="form-control" name="companyPhoneModel" id="inputEditCompanyPhoneModel">
+                            <input type="text" class="form-control" name="companyPhoneModel" id="inputEditCompanyPhoneModel" th:field="*{model}">
                         </div>
                         <div class="col-md-12">
                             <label for="inputEditCompanyPhoneSerialNumber" class="form-label">Serial Number</label>
-                            <input type="text" class="form-control" name="companyPhoneSerialNumber" id="inputEditCompanyPhoneSerialNumber">
+                            <input type="text" class="form-control" name="companyPhoneSerialNumber" id="inputEditCompanyPhoneSerialNumber" th:field="*{serialNumber}">
                         </div>
                         <div class="col-md-12">
                             <label for="inputEditCompanyPhonePhoneNumber" class="form-label">Phone number</label>
-                            <input type="text" class="form-control" name="companyPhonePhoneNumber" id="inputEditCompanyPhonePhoneNumber">
+                            <input type="text" class="form-control" name="companyPhonePhoneNumber" id="inputEditCompanyPhonePhoneNumber" th:field="*{phoneNumber}">
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-dark">Update</button>
+                    <button type="submit" class="btn btn-dark">Update</button>
                 </div>
             </form>
         </div>
@@ -658,14 +658,14 @@
                 <h5 class="modal-title" id="deleteCompanyPhoneModalLabel">Delete company phone</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form>
-                <input type="hidden" id="inputDeleteCompanyPhoneId" name="monitorId">
+            <form th:action="@{'/deleteCompanyPhone'(branchId=${branchId},departmentId=${departmentDto.id},workstationId=${workstationDto.workstationId})}" th:object="${companyPhoneDto}" method="post">
+            <input type="hidden" id="inputDeleteCompanyPhoneId" name="monitorId" th:field="*{id}">
                 <div class="modal-body">
                     Are you sure you want to delete the company phone?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-dark">Delete</button>
+                    <button type="submit" class="btn btn-dark">Delete</button>
                 </div>
             </form>
         </div>

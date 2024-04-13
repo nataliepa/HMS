@@ -3,16 +3,13 @@ package com.natalia.HardwareManagementSystem.service;
 import com.natalia.HardwareManagementSystem.dto.equipment.CompanyPhoneDto;
 import com.natalia.HardwareManagementSystem.dto.equipment.ComputerDto;
 import com.natalia.HardwareManagementSystem.dto.equipment.MonitorDto;
-import com.natalia.HardwareManagementSystem.dto.workstation.WorkstationDto;
 import com.natalia.HardwareManagementSystem.entity.Workstation;
 import com.natalia.HardwareManagementSystem.entity.equipment.CompanyPhone;
 import com.natalia.HardwareManagementSystem.entity.equipment.Computer;
 import com.natalia.HardwareManagementSystem.entity.equipment.Monitor;
-import com.natalia.HardwareManagementSystem.mapper.WorkstationMapper;
 import com.natalia.HardwareManagementSystem.mapper.equipment.CompanyPhoneMapper;
 import com.natalia.HardwareManagementSystem.mapper.equipment.ComputerMapper;
 import com.natalia.HardwareManagementSystem.mapper.equipment.MonitorMapper;
-import com.natalia.HardwareManagementSystem.repository.EquipmentRepository;
 import com.natalia.HardwareManagementSystem.repository.equipment.CompanyPhoneRepository;
 import com.natalia.HardwareManagementSystem.repository.equipment.ComputerRepository;
 import com.natalia.HardwareManagementSystem.repository.equipment.MonitorRepository;
@@ -31,13 +28,6 @@ public class EquipmentServiceImpl implements EquipmentService {
     MonitorRepository monitorRepository;
     @Autowired
     CompanyPhoneRepository companyPhoneRepository;
-    @Autowired
-    EquipmentRepository<Computer> computerRepo;
-    @Autowired
-    EquipmentRepository<Monitor> monitorRepo;
-    @Autowired
-    EquipmentRepository<CompanyPhone> companyPhoneRepo;
-
 
     @Override
     public List<ComputerDto> findComputersByWorkstationId(int id) {
@@ -72,7 +62,7 @@ public class EquipmentServiceImpl implements EquipmentService {
         Computer computer = ComputerMapper.computerDtoToComputer(computerDto);
         computer.setWorkstation(workstation);
 
-        return ComputerMapper.computerToComputerDto(computerRepo.save(computer));
+        return ComputerMapper.computerToComputerDto(computerRepository.save(computer));
     }
 
     @Override
@@ -80,7 +70,7 @@ public class EquipmentServiceImpl implements EquipmentService {
         Monitor monitor = MonitorMapper.monitorDtoToMonitor(monitorDto);
         monitor.setWorkstation(workstation);
 
-        return MonitorMapper.monitorToMonitorDto(monitorRepo.save(monitor));
+        return MonitorMapper.monitorToMonitorDto(monitorRepository.save(monitor));
     }
 
     @Override
@@ -88,17 +78,18 @@ public class EquipmentServiceImpl implements EquipmentService {
         CompanyPhone companyPhone = CompanyPhoneMapper.companyPhoneDtoToCompanyPhone(companyPhoneDto);
         companyPhone.setWorkstation(workstation);
 
-        return CompanyPhoneMapper.companyPhoneToCompanyPhoneDto(companyPhoneRepo.save(companyPhone));
+        return CompanyPhoneMapper.companyPhoneToCompanyPhoneDto(companyPhoneRepository.save(companyPhone));
     }
 
     @Override
-    public ComputerDto updateComputer(ComputerDto computerDto) {
+    public ComputerDto updateComputer(ComputerDto computerDto, Workstation workstation) {
         Computer findComputer = computerRepository.findComputerById(computerDto.getId());
 
         if(findComputer != null) {
             Computer updatedComputer = ComputerMapper.computerDtoToComputer(computerDto);
+            updatedComputer.setWorkstation(workstation);
 
-            return ComputerMapper.computerToComputerDto(computerRepo.save(updatedComputer));
+            return ComputerMapper.computerToComputerDto(computerRepository.save(updatedComputer));
 
         }
 
@@ -106,26 +97,28 @@ public class EquipmentServiceImpl implements EquipmentService {
     }
 
     @Override
-    public MonitorDto updateMonitor(MonitorDto monitorDto) {
+    public MonitorDto updateMonitor(MonitorDto monitorDto, Workstation workstation) {
         Monitor findMonitor = monitorRepository.findMonitorById(monitorDto.getId());
 
         if(findMonitor != null) {
             Monitor updatedMonitor = MonitorMapper.monitorDtoToMonitor(monitorDto);
+            updatedMonitor.setWorkstation(workstation);
 
-            return MonitorMapper.monitorToMonitorDto(monitorRepo.save(updatedMonitor));
+            return MonitorMapper.monitorToMonitorDto(monitorRepository.save(updatedMonitor));
 
         }
         return null;
     }
 
     @Override
-    public CompanyPhoneDto updateCompanyPhone(CompanyPhoneDto companyPhoneDto) {
+    public CompanyPhoneDto updateCompanyPhone(CompanyPhoneDto companyPhoneDto, Workstation workstation) {
         CompanyPhone findCompanyPhone = companyPhoneRepository.findCompanyPhoneById(companyPhoneDto.getId());
 
         if(findCompanyPhone != null) {
             CompanyPhone updatedCompanyPhone= CompanyPhoneMapper.companyPhoneDtoToCompanyPhone(companyPhoneDto);
+            updatedCompanyPhone.setWorkstation(workstation);
 
-            return CompanyPhoneMapper.companyPhoneToCompanyPhoneDto(companyPhoneRepo.save(updatedCompanyPhone));
+            return CompanyPhoneMapper.companyPhoneToCompanyPhoneDto(companyPhoneRepository.save(updatedCompanyPhone));
         }
 
         return null;
@@ -136,7 +129,7 @@ public class EquipmentServiceImpl implements EquipmentService {
         Computer findComputer = computerRepository.findComputerById(computerId);
 
         if(findComputer != null) {
-            computerRepo.delete(findComputer);
+            computerRepository.delete(findComputer);
             return "";
 
         }
@@ -148,7 +141,7 @@ public class EquipmentServiceImpl implements EquipmentService {
         Monitor findMonitor = monitorRepository.findMonitorById(monitorId);
 
         if(findMonitor != null) {
-            monitorRepo.delete(findMonitor);
+            monitorRepository.delete(findMonitor);
             return "";
 
         }
@@ -160,7 +153,7 @@ public class EquipmentServiceImpl implements EquipmentService {
         CompanyPhone findCompanyPhone = companyPhoneRepository.findCompanyPhoneById(companyPhoneId);
 
         if(findCompanyPhone != null) {
-            companyPhoneRepo.delete(findCompanyPhone);
+            companyPhoneRepository.delete(findCompanyPhone);
             return "";
 
         }

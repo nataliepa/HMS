@@ -1,6 +1,10 @@
 package com.natalia.HardwareManagementSystem.entity;
 
 import javax.persistence.*;
+
+import com.natalia.HardwareManagementSystem.entity.equipment.CompanyPhone;
+import com.natalia.HardwareManagementSystem.entity.equipment.Computer;
+import com.natalia.HardwareManagementSystem.entity.equipment.Monitor;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,7 +33,13 @@ public class Workstation {
     private Department department;
 
     @OneToMany(mappedBy = "workstation" ,fetch = FetchType.LAZY, cascade=CascadeType.ALL)
-    private Set<Equipment> equipment;
+    private Set<Computer> computers;
+
+    @OneToMany(mappedBy = "workstation" ,fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+    private Set<Monitor> monitors;
+
+    @OneToMany(mappedBy = "workstation" ,fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+    private Set<CompanyPhone> companyPhones;
 
     @OneToOne(mappedBy = "workstation" ,fetch = FetchType.LAZY)
     private Employee employee;

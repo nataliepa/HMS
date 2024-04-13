@@ -9,6 +9,7 @@ import com.natalia.HardwareManagementSystem.dto.equipment.MonitorDto;
 import com.natalia.HardwareManagementSystem.dto.workstation.WorkstationDto;
 import com.natalia.HardwareManagementSystem.entity.*;
 import com.natalia.HardwareManagementSystem.entity.equipment.Computer;
+import com.natalia.HardwareManagementSystem.entity.equipment.Monitor;
 import com.natalia.HardwareManagementSystem.mapper.CompanyBranchMapper;
 import com.natalia.HardwareManagementSystem.mapper.DepartmentMapper;
 import com.natalia.HardwareManagementSystem.mapper.UserMapper;
@@ -88,7 +89,7 @@ public class EquipmentController {
         model.addAttribute("departmentDto", departmentDto);
         model.addAttribute("workstationDto", workstationDto);
         model.addAttribute("computerDto", new ComputerDto());
-        model.addAttribute("monitorDto", new ComputerDto());
+        model.addAttribute("monitorDto", new MonitorDto());
         model.addAttribute("companyPhoneDto", new CompanyPhoneDto());
 
         return "equipment";
@@ -122,8 +123,64 @@ public class EquipmentController {
         return "error";
     }
 
+    @PostMapping(value = {"/addMonitor"})
+    public String addMonitor(Model model,
+                              @RequestParam(required = false, name = "branchId") String branchId,
+                              @RequestParam(name = "departmentId") String departmentId,
+                              @RequestParam(name = "workstationId") String workstationId,
+                              @ModelAttribute(name = "monitorDto") MonitorDto monitorDto)
+    {
+        Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
+        String username = loggedInUser.getName();  // username χρηστη
+        User user = userService.findByUsername(username);  // ευρεση του χρηστη
+        String role = loggedInUser.getAuthorities().toString();
+
+        if (role.equals("[SuperAdmin]")) { // "SuperAdmin"
+
+            Workstation workstation = workstationService.findWorkstationById(Integer.parseInt(workstationId));
+
+            if(equipmentService.addMonitor(monitorDto, workstation) != null) {
+                model.addAttribute("savedMessage", "");
+            } else {
+                model.addAttribute("savedMessage", "Monitor already exists");
+            }
+
+            return "redirect:/equipment?branchId=" + branchId + "&departmentId=" + departmentId + "&workstationId=" + workstationId;
+        }
+
+        return "error";
+    }
+
+    @PostMapping(value = {"/addCompanyPhone"})
+    public String addCompanyPhone(Model model,
+                             @RequestParam(required = false, name = "branchId") String branchId,
+                             @RequestParam(name = "departmentId") String departmentId,
+                             @RequestParam(name = "workstationId") String workstationId,
+                             @ModelAttribute(name = "companyPhoneDto") CompanyPhoneDto companyPhoneDto)
+    {
+        Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
+        String username = loggedInUser.getName();  // username χρηστη
+        User user = userService.findByUsername(username);  // ευρεση του χρηστη
+        String role = loggedInUser.getAuthorities().toString();
+
+        if (role.equals("[SuperAdmin]")) { // "SuperAdmin"
+
+            Workstation workstation = workstationService.findWorkstationById(Integer.parseInt(workstationId));
+
+            if(equipmentService.addCompanyPhone(companyPhoneDto, workstation) != null) {
+                model.addAttribute("savedMessage", "");
+            } else {
+                model.addAttribute("savedMessage", "Monitor already exists");
+            }
+
+            return "redirect:/equipment?branchId=" + branchId + "&departmentId=" + departmentId + "&workstationId=" + workstationId;
+        }
+
+        return "error";
+    }
+
     @PostMapping(value = {"/updateComputer"})
-    public String updateUser(Model model, @ModelAttribute("computerDto") ComputerDto computerDto,
+    public String updateComputer(Model model, @ModelAttribute("computerDto") ComputerDto computerDto,
                              @RequestParam(required = false, name = "branchId") String branchId,
                              @RequestParam(name = "departmentId") String departmentId,
                              @RequestParam(name = "workstationId") String workstationId) {
@@ -133,8 +190,9 @@ public class EquipmentController {
         String role = loggedInUser.getAuthorities().toString();
 
         if (role.equals("[SuperAdmin]")) { // "SuperAdmin"
+            Workstation workstation = workstationService.findWorkstationById(Integer.parseInt(workstationId));
 
-            if(equipmentService.updateComputer(computerDto) != null) {
+            if(equipmentService.updateComputer(computerDto, workstation) != null) {
                 model.addAttribute("updatedMessage", "");
             } else {
                 model.addAttribute("updatedMessage", "Computer not found");
@@ -146,8 +204,58 @@ public class EquipmentController {
         return "error";
     }
 
+    @PostMapping(value = {"/updateMonitor"})
+    public String updateMonitor(Model model, @ModelAttribute("monitorDto") MonitorDto monitorDto,
+                             @RequestParam(required = false, name = "branchId") String branchId,
+                             @RequestParam(name = "departmentId") String departmentId,
+                             @RequestParam(name = "workstationId") String workstationId) {
+        Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
+        String username = loggedInUser.getName();  // username χρηστη
+        User user = userService.findByUsername(username);  // ευρεση του χρηστη
+        String role = loggedInUser.getAuthorities().toString();
+
+        if (role.equals("[SuperAdmin]")) { // "SuperAdmin"
+            Workstation workstation = workstationService.findWorkstationById(Integer.parseInt(workstationId));
+
+            if(equipmentService.updateMonitor(monitorDto, workstation) != null) {
+                model.addAttribute("updatedMessage", "");
+            } else {
+                model.addAttribute("updatedMessage", "Computer not found");
+            }
+
+            return "redirect:/equipment?branchId=" + branchId + "&departmentId=" + departmentId + "&workstationId=" + workstationId;
+        }
+
+        return "error";
+    }
+
+    @PostMapping(value = {"/updateCompanyPhone"})
+    public String updateCompanyPhone(Model model, @ModelAttribute("companyPhoneDto") CompanyPhoneDto companyPhoneDto,
+                                @RequestParam(required = false, name = "branchId") String branchId,
+                                @RequestParam(name = "departmentId") String departmentId,
+                                @RequestParam(name = "workstationId") String workstationId) {
+        Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
+        String username = loggedInUser.getName();  // username χρηστη
+        User user = userService.findByUsername(username);  // ευρεση του χρηστη
+        String role = loggedInUser.getAuthorities().toString();
+
+        if (role.equals("[SuperAdmin]")) { // "SuperAdmin"
+            Workstation workstation = workstationService.findWorkstationById(Integer.parseInt(workstationId));
+
+            if(equipmentService.updateCompanyPhone(companyPhoneDto, workstation) != null) {
+                model.addAttribute("updatedMessage", "");
+            } else {
+                model.addAttribute("updatedMessage", "Company phone not found");
+            }
+
+            return "redirect:/equipment?branchId=" + branchId + "&departmentId=" + departmentId + "&workstationId=" + workstationId;
+        }
+
+        return "error";
+    }
+
     @PostMapping(value = {"/deleteComputer"})
-    public String deleteUser(Model model, @ModelAttribute(name = "computerDto") ComputerDto computerDto,
+    public String deleteComputer(Model model, @ModelAttribute(name = "computerDto") ComputerDto computerDto,
                              @RequestParam(required = false, name = "branchId") String branchId,
                              @RequestParam(name = "departmentId") String departmentId,
                              @RequestParam(name = "workstationId") String workstationId) {
@@ -161,6 +269,52 @@ public class EquipmentController {
                 model.addAttribute("deleteMessage", "");
             } else {
                 model.addAttribute("deleteMessage", "Computer not found");
+            }
+
+            return "redirect:/equipment?branchId=" + branchId + "&departmentId=" + departmentId + "&workstationId=" + workstationId;
+        }
+
+        return "error";
+    }
+
+    @PostMapping(value = {"/deleteMonitor"})
+    public String deleteMonitor(Model model, @ModelAttribute(name = "monitorDto") MonitorDto monitorDto,
+                             @RequestParam(required = false, name = "branchId") String branchId,
+                             @RequestParam(name = "departmentId") String departmentId,
+                             @RequestParam(name = "workstationId") String workstationId) {
+        Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
+        String username = loggedInUser.getName();  // username χρηστη
+        User user = userService.findByUsername(username);  // ευρεση του χρηστη
+        String role = loggedInUser.getAuthorities().toString();
+
+        if (role.equals("[SuperAdmin]")) { // "SuperAdmin"
+            if(equipmentService.deleteMonitor(monitorDto.getId()).isEmpty()) {
+                model.addAttribute("deleteMessage", "");
+            } else {
+                model.addAttribute("deleteMessage", "Monitor not found");
+            }
+
+            return "redirect:/equipment?branchId=" + branchId + "&departmentId=" + departmentId + "&workstationId=" + workstationId;
+        }
+
+        return "error";
+    }
+
+    @PostMapping(value = {"/deleteCompanyPhone"})
+    public String deleteCompanyPhone(Model model, @ModelAttribute(name = "companyPhoneDto") CompanyPhoneDto companyPhoneDto,
+                             @RequestParam(required = false, name = "branchId") String branchId,
+                             @RequestParam(name = "departmentId") String departmentId,
+                             @RequestParam(name = "workstationId") String workstationId) {
+        Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
+        String username = loggedInUser.getName();  // username χρηστη
+        User user = userService.findByUsername(username);  // ευρεση του χρηστη
+        String role = loggedInUser.getAuthorities().toString();
+
+        if (role.equals("[SuperAdmin]")) { // "SuperAdmin"
+            if(equipmentService.deleteCompanyPhone(companyPhoneDto.getId()).isEmpty()) {
+                model.addAttribute("deleteMessage", "");
+            } else {
+                model.addAttribute("deleteMessage", "Company Phone not found");
             }
 
             return "redirect:/equipment?branchId=" + branchId + "&departmentId=" + departmentId + "&workstationId=" + workstationId;

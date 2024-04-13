@@ -17,9 +17,9 @@ public interface EquipmentService {
     ComputerDto addComputer(ComputerDto computerDto, Workstation workstation);
     MonitorDto addMonitor(MonitorDto monitorDto, Workstation workstation);
     CompanyPhoneDto addCompanyPhone(CompanyPhoneDto companyPhoneDto, Workstation workstation);
-    ComputerDto updateComputer(ComputerDto computerDto);
-    MonitorDto updateMonitor(MonitorDto monitorDto);
-    CompanyPhoneDto updateCompanyPhone(CompanyPhoneDto companyPhoneDto);
+    ComputerDto updateComputer(ComputerDto computerDto, Workstation workstation);
+    MonitorDto updateMonitor(MonitorDto monitorDto, Workstation workstation);
+    CompanyPhoneDto updateCompanyPhone(CompanyPhoneDto companyPhoneDto, Workstation workstation);
     String deleteComputer(int computerId);
     String deleteMonitor(int monitorId);
     String deleteCompanyPhone(int companyPhoneId);
